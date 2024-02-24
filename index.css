@@ -1,5 +1,5 @@
 body {
-    background-color: #1a1a20;
+    background-color: black;
     font-family: Lato, Arial, Helvetica, sans-serif;
     color: #FFF;
 }
@@ -11,12 +11,12 @@ a {
 
 h1 {
     background-color: #141414;
-    border: solid #FFF;
+    border: solid #E65724;
     font-size: 2vw;
 }
 
 div {
-    border: dashed #FFF 0.1vw;
+    border: dashed #E65724 0.1vw;
     width: 100%;
 }
 
