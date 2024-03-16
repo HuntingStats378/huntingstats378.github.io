@@ -2,6 +2,7 @@
 
   body {
     background-color: transparent;
+    border: 1px solid #e8581a;
   }
 
  #count {
