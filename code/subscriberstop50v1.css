@@ -29,8 +29,9 @@
     text-align: left;
     font-family: "Roboto";
     font-weight: 800;
-    color: #151515;
+    color: black;
     font-size: 50px;
+    white-space: nowrap;
   }
 
   @font-face {
