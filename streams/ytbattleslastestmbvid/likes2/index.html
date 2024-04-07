@@ -33,10 +33,10 @@
           const cid = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
 
           setInterval(() => {
-          fetch(`https://yt.lemnoslife.com/noKey/search?part=snippet,id&channelId=${cid}&maxResults=2&order=date&type=video`)
+          fetch(`https://corsproxy.io/?https://axern.space/_next/data/E1-wJ64rVCUHrOSMuNtIy/youtube/channel/${cid}/embed.json?platform=youtube&type=channel&id=${cid}`)
             .then((res) => res.json())
             .then((dataid) => {
-                  const vid = dataid.items[1].id.videoId
+                  const vid = dataid.pageProps.data.latestVideos[1].id
               fetch(`https://nia-statistics.com/api/get?platform=youtube&type=video&id=${vid}`)
                 .then((res) => res.json())
                 .then((data) => {
