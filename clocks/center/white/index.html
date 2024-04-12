@@ -24,27 +24,15 @@
             minIntegerLen: 2,
           });
         }
-  
-  function time() {
-         Time = ((new Date().getTime()));
-    var hours = Math.floor((Time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-     var minutes = Math.floor((Time % (1000 * 60 * 60)) / (1000 * 60));
-     var seconds = Math.floor((Time % (1000 * 60)) / 1000);
-    var miliseconds = Math.floor((Time % (1000 * 0)) / 1000);
-    if (hours < 10) {
-         hours = "0" + hours 
-     }
 
-     if (minutes < 10) {
-         minutes = "0" + minutes
+  function clock() {
+         const d = new Date();
+         var tHour = d.getHours();
+         var tMinute = d.getMinutes();
+         var tSecond = d.getSeconds();
+    document.getElementById("hours").innerHTML = tHour;
+    document.getElementById("minutes").innerHTML = tMinute;
+    document.getElementById("seconds").innerHTML = tSecond;
      }
-
-     if (seconds < 10) {
-         seconds = "0" + seconds
-     }
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
-     }
-  setInterval(time, 0);
+  setInterval(clock, 0);
 </script>
