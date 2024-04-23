@@ -191,8 +191,8 @@ body.light {
   bottom: 0px;
   height: 40px;
   width: 100%;
-  background: #246;
-  color: white;
+  background: transparent;
+  color: transparent;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
