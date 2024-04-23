@@ -7,7 +7,8 @@ html {
 body {
   background-color: transparent;
   color: white;
-  font-family: Arial;
+  font-family: Roboto;
+  font-weight: 700;
   text-align: center;
   overflow: hidden;
 }
