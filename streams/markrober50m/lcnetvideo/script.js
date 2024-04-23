@@ -1,41 +1,12 @@
-function GetGoal(count2) {
-  var count = parseFloat(count2);
-  var t = parseFloat(count2);
-  if (count == null) return 0;
-  if (10 > t) return 10 - t;
-  var e = "" + t;
-  return Math.abs(
-    t -
-      (e.length > 6
-        ? 1e6 * (Math.floor(t / 1e6) + 1)
-        : (parseInt(e.charAt(0)) + 1) * Math.pow(10, e.length - 1))
-  );
-}
-
-function GetGoal2(count2) {
-  var count = parseFloat(count2);
-  var t = parseFloat(count2);
-  if (count == null) return 0;
-  if (10 > t) return 10;
-  var e = "" + t;
-  return e.length > 6
-    ? 1e6 * (Math.floor(t / 1e6) + 1)
-    : (parseInt(e.charAt(0)) + 1) * Math.pow(10, e.length - 1);
-}
-
-function GetGoalText(t) {
-  return ("" + t).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-document.getElementById("imageLink").href = `https://youtube.com/channel/${id}`;
+const id = params.get("id") || "kIPiqwwJYYc";
+document.getElementById("imageLink").href = `https://youtube.com/watch?v=${id}`;
 document.getElementById(
   "subscribeBtn"
-).href = `https://youtube.com/channel/${id}?sub_confirmation=1`;
+).href = `https://youtube.com/watch?v=${id}`;
 
 setInterval(() => {
-  fetch(`https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id}`)
+  fetch(`https://nia-statistics.com/api/get?platform=youtube&type=video&id=${id}`)
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("name").textContent = data.snippet.title;
@@ -49,13 +20,8 @@ setInterval(() => {
         data.snippet.thumbnails[1].url ||
         data.snippet.thumbnails[0].url;
       image.alt = data.snippet.title;
-      document.getElementById("subscribers").innerHTML = data.estSubCount;
-      document.getElementById("goal").innerHTML = GetGoal(data.estSubCount);
-      document.getElementById(
-        "goalText"
-      ).textContent = `subscribers to ${GetGoalText(
-        GetGoal2(data.estSubCount)
-      )}`;
+      document.getElementById("subscribers").innerHTML = data.estViewCount;
+      document.getElementById("goal").innerHTML = data.apiLikeCount;
     });
 }, 2000);
 
@@ -85,7 +51,7 @@ function search() {
   const prompt = window.prompt("Enter channel name, ID, or URL.");
   if (prompt)
     fetch(
-      `https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
+      `https://axern.space/api/search?platform=youtube&type=video&query=${prompt}`
     )
       .then((res) => res.json())
       .then((data) => {
