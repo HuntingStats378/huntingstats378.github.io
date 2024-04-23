@@ -10,9 +10,6 @@ setInterval(() => {
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("name").textContent = data.snippet.title;
-      document.querySelector(
-        '[data-icon="zondicons:checkmark"]'
-      ).style.display = data.isStudio ? "block" : "none";
 
       const image = document.getElementById("image");
       image.src =
