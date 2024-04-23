@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-color: rgb(23, 23, 23);
+  background-color: transparent;
   color: white;
   font-family: Arial;
   text-align: center;
@@ -13,7 +13,7 @@ body {
 }
 
 body.light {
-  background-color: rgb(208, 228, 254);
+  background-color: transparent;
   color: black;
 }
 
@@ -191,8 +191,8 @@ body.light {
   bottom: 0px;
   height: 40px;
   width: 100%;
-  background: #246;
-  color: white;
+  background: transparent;
+  color: transparent;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
