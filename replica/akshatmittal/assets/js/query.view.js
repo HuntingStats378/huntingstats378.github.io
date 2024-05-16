@@ -9,11 +9,11 @@ YT.query = {
                 alert("No results found!");
                 return;
             }
-            YT.updateManager.updateChannelID(e.data[0].id);
-            YT.updateManager.updateCover(e.data[0].avatar);
-            YT.updateManager.updateName(e.data[0].name);
-            YT.updateManager.updateProfile(e.data[0].avatar);
-            YT.urls.pushState(e.data[0].id);
+            YT.updateManager.updateChannelID(e[0].id);
+            YT.updateManager.updateCover(e[0].avatar);
+            YT.updateManager.updateName(e[0].name);
+            YT.updateManager.updateProfile(e[0].avatar);
+            YT.urls.pushState(e[0].id);
             YT.live.start();
         });
     },
