@@ -6,7 +6,7 @@ document.getElementById(
 ).href = `https://youtube.com/watch?v=${id}`;
 
 setInterval(() => {
-  fetch(`https://nia-statistics.com/api/get?platform=youtube&type=video&id=${id}`)
+  fetch(`https://axern.space/api/get?platform=youtube&type=video&id=${id}`)
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("name").textContent = data.snippet.title;
@@ -48,7 +48,7 @@ function search() {
   const prompt = window.prompt("Enter channel name, ID, or URL.");
   if (prompt)
     fetch(
-      `https://axern.space/api/search?platform=youtube&type=video&query=${prompt}`
+      `https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
     )
       .then((res) => res.json())
       .then((data) => {
