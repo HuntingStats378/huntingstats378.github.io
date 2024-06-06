@@ -31,7 +31,7 @@
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("banner").src = `https://banner.yt/${id1}`;
+                document.getElementById("banner").src = `https://banner.yt/${id}`;
                 document.getElementById("image").src = data.snippet.thumbnails.high.url;
                 document.getElementById("name").textContent = data.snippet.title;
                 document.getElementById("views").innerHTML = data.estViewCount;
