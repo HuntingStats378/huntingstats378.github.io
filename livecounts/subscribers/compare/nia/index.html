@@ -51,13 +51,13 @@
           .then((res) => res.json())
           .then((data2) => {
             
-            document.getElementById("banner1").src = data1.snippet.banner;
-            document.getElementById("image1").src = data1.snippet.thumbnails[2].url;
+            document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+            document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
             document.getElementById("name1").textContent = data1.snippet.title;
             document.getElementById("subs1").innerHTML = data1.estSubCount;
-              document.getElementById("banner2").src = data2.snippet.banner;
+              document.getElementById("banner2").src = `https://banner.yt/${id2}`;
             
-document.getElementById("image2").src = data2.snippet.thumbnails[2].url;
+document.getElementById("image2").src = data2.snippet.thumbnails.high.url;
             document.getElementById("name2").textContent = data2.snippet.title;
                 document.getElementById("subs2").innerHTML = data2.estSubCount;
             document.getElementById("gap").innerHTML =
