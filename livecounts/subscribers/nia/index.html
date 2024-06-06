@@ -31,8 +31,8 @@
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("banner").src = data.snippet.banner;
-                document.getElementById("image").src = data.snippet.thumbnails[2].url;
+                document.getElementById("banner").src = `https://banner.yt/${id}`;
+                document.getElementById("image").src = data.snippet.thumbnails.high.url;
                 document.getElementById("name").textContent = data.snippet.title;
                 document.getElementById("subs").innerHTML = data.estSubCount;
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
