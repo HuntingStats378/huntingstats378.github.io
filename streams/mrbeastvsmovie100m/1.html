@@ -204,7 +204,7 @@
         .then((res) => res.json())
         .then((data) => {
           fetch(
-            `https://backend.mixerno.space/instagram/test/${id2}`
+            `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id2}`
           )
             .then((res) => res.json())
             .then((date) => {
@@ -214,18 +214,18 @@
                     .then((res) => res.json())
                     .then((dataa) => {
                                                 document.getElementById("image1").src = data.snippet.thumbnails.high.url;
-                                                document.getElementById("image2").src = date.user.pfp;
+                                                document.getElementById("image2").src = date.snippet.thumbnails.high.url;
                                                 document.getElementById("name1").textContent = data.snippet.title;
-                                        document.getElementById("name2").textContent = date.user.name;
+                                        document.getElementById("name2").textContent = date.snippet.title;
                             document.getElementById("username1").textContent = data.snippet.customUrl;
-                            document.getElementById("username2").textContent = `@${date.user.username}`;
+                            document.getElementById("username2").textContent = data.snippet.customUrl;
                         document.getElementById("igplace").textContent = `#${datr.place}`;
           
 document.getElementById("subs1").innerHTML = data.estSubCount;
-              document.getElementById("subs2").innerHTML = date.user.followerCount;
-                document.getElementById("gap").innerHTML = data.estSubCount - date.user.followerCount;
+              document.getElementById("subs2").innerHTML = date.estSubCount;
+                document.getElementById("gap").innerHTML = data.estSubCount - date.estSubCount;
                 document.getElementById("views1").innerHTML = data.estViewCount;
-                  document.getElementById("views2").innerHTML = date.user.posts;
+                  document.getElementById("views2").innerHTML = date.estViewCount;
                             document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
                             document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
