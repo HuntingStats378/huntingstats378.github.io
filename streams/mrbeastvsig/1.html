@@ -199,26 +199,14 @@
                 const id1 = datr.one
                 const id2 = datr.two
                 fetch(
-            `https://backend.mixerno.space/instagram/test/${id2}`
-          )
-            .then((res) => res.json())
-            .then((date) => {
-                fetch(
                     `https://api.communitrics.com/mrbeaststats`
                   )
                     .then((res) => res.json())
                     .then((dataa) => {
-                                                document.getElementById("image2").src = date.user.pfp;
-                                                document.getElementById("name2").textContent = date.user.name;
-                            document.getElementById("username2").textContent = `@${date.user.username}`;
-                        document.getElementById("igplace").textContent = `#${datr.place}`;
-              document.getElementById("subs2").innerHTML = date.user.followerCount;
-                document.getElementById("gap").innerHTML = data.estSubCount - date.user.followerCount;
-                  document.getElementById("views2").innerHTML = date.user.posts;
+                                               document.getElementById("igplace").textContent = `#${datr.place}`;
                             document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
                             document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
-        });
         });
           });
               }, 2000);
@@ -275,6 +263,20 @@
             });
                   }, 2000);
 
+    setInterval(() => {
+          fetch(
+            `https://backend.mixerno.space/instagram/test/${id2}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+                const image2 = data.user.pfp;
+                const name2 = data.user.name;
+                const username2 = `@${data.user.username}`;
+                const subs2 = data.user.followerCount;
+                const views = data.user.posts;
+            });
+                  }, 2000);
+
                     setInterval(() => {
           const image1 = document.getElementById("image1");
       image1.src =
@@ -304,5 +306,19 @@
       views1.innerHTML =
         niaviews1 ||
         mixviews1;
+
+                        image2.src =
+        image2;
+
+                        name2.textContent =
+        name2;
+                        username2.textContent =
+        username2;
+                        subs2.innerHTML =
+        subs2;
+                        views2.innerHTML =
+        views2;
+                        gap.innerHTML =
+        subs1 - subs2;
                   }, 2000);
 </script>
