@@ -199,11 +199,6 @@
                 const id1 = datr.one
                 const id2 = datr.two
                 fetch(
-                    `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          fetch(
             `https://backend.mixerno.space/instagram/test/${id2}`
           )
             .then((res) => res.json())
@@ -224,7 +219,6 @@
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
                             document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
         });
-          });
         });
           });
               }, 2000);
