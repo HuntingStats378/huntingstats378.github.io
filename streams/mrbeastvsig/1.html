@@ -213,18 +213,12 @@
                   )
                     .then((res) => res.json())
                     .then((dataa) => {
-                                                document.getElementById("image1").src = data.snippet.thumbnails.high.url;
                                                 document.getElementById("image2").src = date.user.pfp;
-                                                document.getElementById("name1").textContent = data.snippet.title;
-                                        document.getElementById("name2").textContent = date.user.name;
-                            document.getElementById("username1").textContent = data.snippet.customUrl;
+                                                document.getElementById("name2").textContent = date.user.name;
                             document.getElementById("username2").textContent = `@${date.user.username}`;
                         document.getElementById("igplace").textContent = `#${datr.place}`;
-          
-document.getElementById("subs1").innerHTML = data.estSubCount;
               document.getElementById("subs2").innerHTML = date.user.followerCount;
                 document.getElementById("gap").innerHTML = data.estSubCount - date.user.followerCount;
-                document.getElementById("views1").innerHTML = data.estViewCount;
                   document.getElementById("views2").innerHTML = date.user.posts;
                             document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
@@ -304,5 +298,17 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
       name1.textContent =
         nianame1 ||
         mixname1;
+                        const username1 = document.getElementById("username1");
+      username1.textContent =
+        niausername1 ||
+        mixusername1;
+                        const subs1 = document.getElementById("subs1");
+      subs1.innerHTML =
+        niasubs1 ||
+        mixsubs1;
+                        const views1 = document.getElementById("views1");
+      views1.innerHTML =
+        niaviews1 ||
+        mixviews1;
                   }, 2000);
 </script>
