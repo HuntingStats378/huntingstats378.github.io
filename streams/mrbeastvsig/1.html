@@ -198,7 +198,7 @@
             .then((datr) => {
                 const id1 = datr.one
                 const id2 = datr.two
-                igplace.textContent = `#${datr.place}`;
+                document.getElementById("igplace").textContent = `#${datr.place}`;
         });
               }, 2000);
     
@@ -280,7 +280,7 @@
                   }, 2000);
 
                     setInterval(() => {
-          image1.src =
+          document.getElementById("image1").src =
         niaimage1 ||
         niaimage2 ||
         niaimage3 ||
@@ -291,31 +291,31 @@
         niaimage8 ||
         miximage1;
 
-                        name1.textContent =
+                        document.getElementById("name1").textContent =
         nianame1 ||
         mixname1;
-                        username1.textContent =
+                        document.getElementById("username1").textContent =
         niausername1 ||
         mixusername1;
-                        subs1.innerHTML =
+                        document.getElementById("subs1").innerHTML =
         niasubs1 ||
         mixsubs1;
-                        views1.innerHTML =
+                        document.getElementById("views1").innerHTML =
         niaviews1 ||
         mixviews1;
 
-                        image2.src =
+                        document.getElementById("image2").src =
         image2;
 
-                        name2.textContent =
+                        document.getElementById("name2").textContent =
         name2;
-                        username2.textContent =
+                        document.getElementById("username2").textContent =
         username2;
-                        subs2.innerHTML =
+                        document.getElementById("subs2").innerHTML =
         subs2;
-                        views2.innerHTML =
+                        document.getElementById("views2").innerHTML =
         views2;
-                        gap.innerHTML =
+                        document.getElementById("gap").innerHTML =
         subs1 - subs2;
                   }, 2000);
 </script>
