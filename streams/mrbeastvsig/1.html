@@ -196,8 +196,8 @@
           )
             .then((res) => res.json())
             .then((data) => {
-                const id1 = datr.one
-                const id2 = datr.two
+                const id1 = data.one;
+                const id2 = data.two;
                 document.getElementById("igplace").textContent = `#${data.place}`;
         });
               }, 2000);
