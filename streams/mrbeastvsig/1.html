@@ -272,4 +272,17 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
                 const niaimage8 = data.snippet.thumbnails[0].url;
             });
                   }, 2000);
+
+                    setInterval(() => {
+          const image1 = document.getElementById("image1");
+      image1.src =
+        niaimage1 ||
+        niaimage2 ||
+        niaimage3 ||
+        niaimage4 ||
+        niaimage5 ||
+        niaimage6 ||
+        niaimage7 ||
+        niaimage8;
+                  }, 2000);
 </script>
