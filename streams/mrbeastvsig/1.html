@@ -234,7 +234,7 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
         });
           });
               }, 2000);
-
+    
     setInterval(() => {
           fetch(
             `https://api-v2.nextcounts.com/api/youtube/channel/${id3}`
@@ -250,5 +250,24 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
                     document.getElementById("subs4").innerHTML = date.subcount;
             });
               });
+                  }, 2000);
+    
+    setInterval(() => {
+          fetch(
+            `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+                const niasubs1 = data.estSubCount;
+                const niaviews1 = data.estViewCount;
+                const niaimage1 = data.snippet.thumbnails.maxres.url;
+                const niaimage2 = data.snippet.thumbnails.standard.url;
+                const niaimage3 = data.snippet.thumbnails.high.url;
+                const niaimage4 = data.snippet.thumbnails.medium.url;
+                const niaimage5 = data.snippet.thumbnails.default.url;
+                const niaimage6 = data.snippet.thumbnails[2].url;
+                const niaimage7 = data.snippet.thumbnails[1].url;
+                const niaimage8 = data.snippet.thumbnails[0].url;
+            });
                   }, 2000);
 </script>
