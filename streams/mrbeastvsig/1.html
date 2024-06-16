@@ -273,6 +273,20 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
             });
                   }, 2000);
 
+    setInterval(() => {
+          fetch(
+            `https://mixerno.space/api/youtube-channel-counter/user/${id1}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+                const mixsubs1 = data.counts[0].count;
+                const mixviews1 = data.counts[3].count;
+                const mixusername1 = `@${data.user[0].count}`;
+                const mixname1 = data.user[0].count;
+                const miximage1 = data.user[1].count;
+            });
+                  }, 2000);
+
                     setInterval(() => {
           const image1 = document.getElementById("image1");
       image1.src =
@@ -283,6 +297,12 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
         niaimage5 ||
         niaimage6 ||
         niaimage7 ||
-        niaimage8;
+        niaimage8 ||
+        miximage1;
+
+                        const name1 = document.getElementById("name1");
+      name1.textContent =
+        nianame1 ||
+        mixname1;
                   }, 2000);
 </script>
