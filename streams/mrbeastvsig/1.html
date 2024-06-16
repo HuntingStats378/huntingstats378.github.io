@@ -195,10 +195,10 @@
             "numbers.json"
           )
             .then((res) => res.json())
-            .then((datr) => {
+            .then((data) => {
                 const id1 = datr.one
                 const id2 = datr.two
-                document.getElementById("igplace").textContent = `#${datr.place}`;
+                document.getElementById("igplace").textContent = `#${data.place}`;
         });
               }, 2000);
     
