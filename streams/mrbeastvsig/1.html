@@ -142,12 +142,12 @@
     #nam {
         margin-top: -25px;
     }
-    
+
     #name1 {
         margin-left: 105px;
         font-size: 20px;
     }
-    
+
     #name2 {
         margin-left: 653px;
         font-size: 20px;
@@ -170,7 +170,7 @@
         margin-left: 653px;
         font-size: 15px;
     }
-    
+
     .center {
         text-align: center;
     }
@@ -195,13 +195,46 @@
             "numbers.json"
           )
             .then((res) => res.json())
-            .then((data) => {
-                const id1 = data.one;
-                const id2 = data.two;
-                document.getElementById("igplace").textContent = `#${data.place}`;
+            .then((datr) => {
+                const id1 = datr.one
+                const id2 = datr.two
+                fetch(
+                    `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          fetch(
+            `https://backend.mixerno.space/instagram/test/${id2}`
+          )
+            .then((res) => res.json())
+            .then((date) => {
+                fetch(
+                    `https://api.communitrics.com/mrbeaststats`
+                  )
+                    .then((res) => res.json())
+                    .then((dataa) => {
+                                                document.getElementById("image1").src = data.snippet.thumbnails.high.url;
+                                                document.getElementById("image2").src = date.user.pfp;
+                                                document.getElementById("name1").textContent = data.snippet.title;
+                                        document.getElementById("name2").textContent = date.user.name;
+                            document.getElementById("username1").textContent = data.snippet.customUrl;
+                            document.getElementById("username2").textContent = `@${date.user.username}`;
+                        document.getElementById("igplace").textContent = `#${datr.place}`;
+
+document.getElementById("subs1").innerHTML = data.estSubCount;
+              document.getElementById("subs2").innerHTML = date.user.followerCount;
+                document.getElementById("gap").innerHTML = data.estSubCount - date.user.followerCount;
+                document.getElementById("views1").innerHTML = data.estViewCount;
+                  document.getElementById("views2").innerHTML = date.user.posts;
+                            document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
+                            document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
+                            document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
         });
+          });
+        });
+          });
               }, 2000);
-    
+
     setInterval(() => {
           fetch(
             `https://api-v2.nextcounts.com/api/youtube/channel/${id3}`
@@ -217,106 +250,5 @@
                     document.getElementById("subs4").innerHTML = date.subcount;
             });
               });
-                  }, 2000);
-    
-    setInterval(() => {
-          fetch(
-            `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-                const niasubs1 = data.estSubCount;
-                const niaviews1 = data.estViewCount;
-                const niausername1 = data.snippet.customUrl;
-                const nianame1 = data.snippet.title;
-                const niaimage1 = data.snippet.thumbnails.maxres.url;
-                const niaimage2 = data.snippet.thumbnails.standard.url;
-                const niaimage3 = data.snippet.thumbnails.high.url;
-                const niaimage4 = data.snippet.thumbnails.medium.url;
-                const niaimage5 = data.snippet.thumbnails.default.url;
-                const niaimage6 = data.snippet.thumbnails[2].url;
-                const niaimage7 = data.snippet.thumbnails[1].url;
-                const niaimage8 = data.snippet.thumbnails[0].url;
-            });
-                  }, 2000);
-
-    setInterval(() => {
-          fetch(
-            `https://mixerno.space/api/youtube-channel-counter/user/${id1}`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-                const mixsubs1 = data.counts[0].count;
-                const mixviews1 = data.counts[3].count;
-                const mixusername1 = `@${data.user[0].count}`;
-                const mixname1 = data.user[0].count;
-                const miximage1 = data.user[1].count;
-            });
-                  }, 2000);
-
-    setInterval(() => {
-          fetch(
-            `https://backend.mixerno.space/instagram/test/${id2}`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-                const image2 = data.user.pfp;
-                const name2 = data.user.name;
-                const username2 = `@${data.user.username}`;
-                const subs2 = data.user.followerCount;
-                const views = data.user.posts;
-            });
-                  }, 2000);
-
-    setInterval(() => {
-          fetch(
-            "https://api.communitrics.com/mrbeaststats"
-          )
-            .then((res) => res.json())
-            .then((data) => {
-                document.getElementById("mbday").innerHTML = (data.averageSubscribersGainedPerDay / 1);
-                document.getElementById("mbhr").innerHTML = (data.averageSubscribersGainedPerDay / 24);
-                document.getElementById("mbmin").innerHTML = (data.averageSubscribersGainedPerDay / 1440);
-            });
-                  }, 2000);
-
-                    setInterval(() => {
-          document.getElementById("image1").src =
-        niaimage1 ||
-        niaimage2 ||
-        niaimage3 ||
-        niaimage4 ||
-        niaimage5 ||
-        niaimage6 ||
-        niaimage7 ||
-        niaimage8 ||
-        miximage1;
-
-                        document.getElementById("name1").textContent =
-        nianame1 ||
-        mixname1;
-                        document.getElementById("username1").textContent =
-        niausername1 ||
-        mixusername1;
-                        document.getElementById("subs1").innerHTML =
-        niasubs1 ||
-        mixsubs1;
-                        document.getElementById("views1").innerHTML =
-        niaviews1 ||
-        mixviews1;
-
-                        document.getElementById("image2").src =
-        image2;
-
-                        document.getElementById("name2").textContent =
-        name2;
-                        document.getElementById("username2").textContent =
-        username2;
-                        document.getElementById("subs2").innerHTML =
-        subs2;
-                        document.getElementById("views2").innerHTML =
-        views2;
-                        document.getElementById("gap").innerHTML =
-        subs1 - subs2;
                   }, 2000);
 </script>
