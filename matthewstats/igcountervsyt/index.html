@@ -82,13 +82,7 @@ document.getElementById("image2").src = data2.user.pfp;
   function search2() {
     const prompt = window.prompt("Enter channel name, ID, or URL.");
     if (prompt)
-      fetch(
-        `https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
-      )
-        .then((res) => res.json())
-        .then((date2) => {
-          searchParams2.set("id2", date2[0].id)
+      searchParams2.set("id2", prompt)
           window.location.href = "?" + searchParams2.toString()
-        });
   }
 </script>
