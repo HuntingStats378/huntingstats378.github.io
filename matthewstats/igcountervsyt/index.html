@@ -80,9 +80,14 @@ document.getElementById("image2").src = data2.user.pfp;
   }
 
   function search2() {
-    const prompt = window.prompt("Enter channel name, ID, or URL.");
+    const prompt = window.prompt("Enter account name or URL.");
     if (prompt)
-      searchParams2.set("id2", prompt)
+    fetch(
+  )
+  .then((res) => res.json())
+  .then((date2) => {
+      searchParams2.set("id2", date2.users[0].user_name)
           window.location.href = "?" + searchParams2.toString()
+  });
   }
 </script>

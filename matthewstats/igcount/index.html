@@ -102,14 +102,14 @@
   });
   
       function search() {
-    const prompt = window.prompt("Enter channel name, ID, or URL.");
+    const prompt = window.prompt("Enter account name or URL.");
     if (prompt)
       fetch(
         `https://backend.mixerno.space/instagram/searchfull/${prompt}`
       )
         .then((res) => res.json())
-        .then((date) => {
-          searchParams.set("id", users[0].user_name)
+        .then((data) => {
+          searchParams.set("id", data.users[0].user_name)
           window.location.href = "?" + searchParams.toString()
         });
   }
