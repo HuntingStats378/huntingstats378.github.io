@@ -22,10 +22,9 @@
   <div id="chart" class="chart" style="background-color: black;"></div>
 <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script><script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/highstock.js"></script>
 <script>
-  const searchParams1 = new URLSearchParams(window.location.search);
-  const id = searchParams1.get("id") || "MS4wLjABAAAABKjQkOz_IIzXXzEAl_9LGsWhvK-gBnlczwRPXK8EmxAp6K3X0qiaP5_OEqmm0XwG";
-  const searchParams2 = new URLSearchParams(window.location.search);
-  const name = searchParams2.get("name") || "MrBeast";
+  const searchParams = new URLSearchParams(window.location.search);
+  const id = searchParams.get("id") || "MS4wLjABAAAABKjQkOz_IIzXXzEAl_9LGsWhvK-gBnlczwRPXK8EmxAp6K3X0qiaP5_OEqmm0XwG";
+    const name = searchParams.get("name") || "MrBeast";
 
   setInterval(() => {
         fetch(
@@ -102,7 +101,7 @@
           lineColor: '#FFFFFF'
       }]
   });
-  
+
       function search() {
     const prompt = window.prompt("Enter account name or URL.");
     if (prompt)
@@ -111,12 +110,12 @@
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams1.set("id", data.sec_uid)
-          searchParams2.set("name", data.nickname)
-          window.location.href = "?" + searchParams1.toString() + "&" + searchParams2.toString()
+          searchParams.set("id", data.sec_uid)
+          searchParams.set("name", data.nickname)
+          window.location.href = "?" + searchParams.toString()
         });
   }
-  
+
   function footer() {
     href("./../")
   }
