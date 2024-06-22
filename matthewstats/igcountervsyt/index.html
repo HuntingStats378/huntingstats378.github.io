@@ -73,8 +73,8 @@ document.getElementById("image2").src = data2.user.pfp;
         `https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
       )
         .then((res) => res.json())
-        .then((date1) => {
-          searchParams1.set("id1", date1[0].id)
+        .then((data) => {
+          searchParams1.set("id1", data[0].id)
           window.location.href = "?" + searchParams1.toString()
         });
   }
@@ -83,11 +83,12 @@ document.getElementById("image2").src = data2.user.pfp;
     const prompt = window.prompt("Enter account name or URL.");
     if (prompt)
     fetch(
-  )
-  .then((res) => res.json())
-  .then((date2) => {
-      searchParams2.set("id2", date2.users[0].user_name)
-          window.location.href = "?" + searchParams2.toString()
-  });
+        `https://backend.mixerno.space/instagram/searchfull/${prompt}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          searchParams.set("id", data.users[0].user_name)
+          window.location.href = "?" + searchParams.toString()
+        });
   }
 </script>
