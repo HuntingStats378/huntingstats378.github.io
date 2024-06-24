@@ -98,7 +98,7 @@
           .then((res) => res.json())
           .then((data) => {
             fetch(
-              `https://backend.mixerno.space/instagram/test/${id2}`
+              `numbers.json`
             )
               .then((res) => res.json())
               .then((date) => {
@@ -107,7 +107,7 @@
                             if (chart2.series[0].points.length == 1500) chart2.series[0].data[0].remove();
                             chart2.series[0].addPoint([Date.now(), date.user.followerCount])
                   if (chart3.series[0].points.length == 1500) chart3.series[0].data[0].remove();
-                  chart3.series[0].addPoint([Date.now(), (date.user.followerCount - data.estSubCount)])
+                  chart3.series[0].addPoint([Date.now(), ("0" - data.estSubCount)])
                           });
                   });
             });
