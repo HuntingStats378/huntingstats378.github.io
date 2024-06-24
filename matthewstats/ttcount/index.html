@@ -24,7 +24,6 @@
 <script>
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get("id") || "MrBeast";
-  const name;
 
     fetch(
         `https://countik.com/api/exist/${id}`
@@ -32,7 +31,8 @@
         .then((res) => res.json())
         .then((data) => {
 
-          document.getElementById("name").textContent = data.nickname;
+          const name = data.nickname;
+          document.getElementById("name").textContent = name;
         });
 
   setInterval(() => {
