@@ -23,18 +23,26 @@
 <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script><script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/highstock.js"></script>
 <script>
   const searchParams = new URLSearchParams(window.location.search);
-  const id = searchParams.get("id") || "MS4wLjABAAAABKjQkOz_IIzXXzEAl_9LGsWhvK-gBnlczwRPXK8EmxAp6K3X0qiaP5_OEqmm0XwG";
-    const name = searchParams.get("name") || "MrBeast";
+  const id = searchParams.get("id") || "MrBeast";
+  const name;
+
+    fetch(
+        `https://countik.com/api/exist/${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+
+          document.getElementById("name").textContent = data.nickname;
+        });
 
   setInterval(() => {
         fetch(
-          `https://countik.com/api/userinfo?sec_user_id=${id}`
+          `https://countik.com/api/userinfo?sec_user_id=${name}`
         )
           .then((res) => res.json())
           .then((data) => {
                 document.getElementById("banner").src = data.avatarThumb;
                 document.getElementById("image").src = data.avatarThumb;
-                document.getElementById("name").textContent = name;
                 document.getElementById("subs").innerHTML = data.followerCount;
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
                 chart.series[0].addPoint([Date.now(), data.followerCount])
