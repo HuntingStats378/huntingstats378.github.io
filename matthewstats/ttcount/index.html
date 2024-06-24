@@ -23,16 +23,16 @@
 <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script><script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/highstock.js"></script>
 <script>
   const searchParams = new URLSearchParams(window.location.search);
-  const id = searchParams.get("id") || "MrBeast";
+  const name = searchParams.get("id") || "MrBeast";
 
     fetch(
-        `https://countik.com/api/exist/${id}`
+        `https://countik.com/api/exist/${name}`
       )
         .then((res) => res.json())
         .then((data) => {
 
           document.getElementById("name").textContent = data.nickname;
-          id = data.sec_uid;
+          const id = data.sec_uid;
         });
 
   setInterval(() => {
