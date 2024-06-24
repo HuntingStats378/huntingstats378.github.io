@@ -24,6 +24,7 @@
 <script>
   const searchParams = new URLSearchParams(window.location.search);
   const name = searchParams.get("id") || "MrBeast";
+    let tid
 
     fetch(
         `https://countik.com/api/exist/${name}`
@@ -32,12 +33,12 @@
         .then((data) => {
 
           document.getElementById("name").textContent = data.nickname;
-          const id = data.sec_uid;
+          tid = data.sec_uid;
         });
 
   setInterval(() => {
         fetch(
-          `https://countik.com/api/userinfo?sec_user_id=${id}`
+          `https://countik.com/api/userinfo?sec_user_id=${tid}`
         )
           .then((res) => res.json())
           .then((data) => {
@@ -111,15 +112,14 @@
   });
 
       function search() {
-    const prompt = window.prompt("Enter account name or URL.");
+    const prompt = window.prompt("Enter account name.");
     if (prompt)
       fetch(
         `https://countik.com/api/exist/${prompt}`
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams.set("id", data.sec_uid)
-          searchParams.set("name", data.nickname)
+          searchParams.set("id", data.nickname)
           window.location.href = "?" + searchParams.toString()
         });
   }
