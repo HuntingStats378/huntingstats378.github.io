@@ -31,8 +31,8 @@
         .then((res) => res.json())
         .then((data) => {
 
-          const name = data.nickname;
-          document.getElementById("name").textContent = name;
+          document.getElementById("name").textContent = data.nickname;
+          id = data.sec_uid;
         });
 
   setInterval(() => {
