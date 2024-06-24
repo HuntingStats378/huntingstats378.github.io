@@ -204,7 +204,7 @@
         .then((res) => res.json())
         .then((data) => {
           fetch(
-            `https://backend.mixerno.space/instagram/test/${id2}`
+            `numbers.json`
           )
             .then((res) => res.json())
             .then((date) => {
@@ -216,16 +216,16 @@
                                                 document.getElementById("image1").src = data.snippet.thumbnails.high.url;
                                                 document.getElementById("image2").src = date.user.pfp;
                                                 document.getElementById("name1").textContent = data.snippet.title;
-                                        document.getElementById("name2").textContent = date.user.name;
+                                        document.getElementById("name2").textContent = "no";
                             document.getElementById("username1").textContent = data.snippet.customUrl;
-                            document.getElementById("username2").textContent = `@${date.user.username}`;
+                            document.getElementById("username2").textContent = `@"no"`;
                         document.getElementById("igplace").textContent = `#${datr.place}`;
 
 document.getElementById("subs1").innerHTML = data.estSubCount;
-              document.getElementById("subs2").innerHTML = date.user.followerCount;
-                document.getElementById("gap").innerHTML = data.estSubCount - date.user.followerCount;
+              document.getElementById("subs2").innerHTML = "0";
+                document.getElementById("gap").innerHTML = data.estSubCount - "0";
                 document.getElementById("views1").innerHTML = data.estViewCount;
-                  document.getElementById("views2").innerHTML = date.user.posts;
+                  document.getElementById("views2").innerHTML = "0";
                             document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
                             document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
