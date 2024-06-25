@@ -37,7 +37,7 @@
   const searchParams1 = new URLSearchParams(window.location.search);
   const id1 = searchParams1.get("id1") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
   const searchParams2 = new URLSearchParams(window.location.search);
-  const name = searchParams.get("id2") || "kendalljenner";
+  const name = searchParams2.get("id2") || "kendalljenner";
     let tid
     let subs
 
@@ -74,7 +74,7 @@
             document.getElementById("name1").textContent = data1.snippet.title;
             document.getElementById("subs1").innerHTML = data1.estSubCount;
             document.getElementById("gap").innerHTML =
-                        data1.estSubCount - subs;
+                        subs - data1.estSubCount;
                 });
             }, 2000);
 
@@ -102,6 +102,5 @@
           searchParams2.set("id2", data.results[0].id)
           window.location.href = "?" + searchParams2.toString()
         });
-  }
   }
 </script>
