@@ -220,7 +220,7 @@
         .then((res) => res.json())
         .then((data) => {
             document.getElementById("name2").textContent = data.results[0].name;
-            document.getElementById("username2").textContent = `#${data.results[0].username}`;
+            document.getElementById("username2").textContent = `@${data.results[0].username}`;
             document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
         });
     
