@@ -37,32 +37,44 @@
   const searchParams1 = new URLSearchParams(window.location.search);
   const id1 = searchParams1.get("id1") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
   const searchParams2 = new URLSearchParams(window.location.search);
-  const id2 = searchParams2.get("id2") || "taylorswift";
+  const name = searchParams.get("id2") || "kendalljenner";
+    let tid
+    let subs
 
+    fetch(
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("name2").textContent = data.results[0].name;
+            document.getElementById("banner2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+            document.getElementById("image1").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+            tid = data.results[0].id;
+        });
+
+    setInterval(() => {
+        fetch(
+          `https://livecounts.xyz/api/instagram-live-follower-count/live/${tid}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+                document.getElementById("subs2").innerHTML = data.counts[0];
+              subs = data.counts[0];
+                        });
+                }, 2000);
+    
   setInterval(() => {
     fetch(
       `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
     )
       .then((res) => res.json())
       .then((data1) => {
-        fetch(
-          `https://backend.mixerno.space/instagram/test/${id2}`
-        )
-          .then((res) => res.json())
-          .then((data2) => {
-            
-            document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+        document.getElementById("banner1").src = `https://banner.yt/${id1}`;
             document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
             document.getElementById("name1").textContent = data1.snippet.title;
             document.getElementById("subs1").innerHTML = data1.estSubCount;
-              document.getElementById("banner2").src = data2.user.banner;
-            
-document.getElementById("image2").src = data2.user.pfp;
-            document.getElementById("name2").textContent = data2.user.name;
-                document.getElementById("subs2").innerHTML = data2.user.followerCount;
             document.getElementById("gap").innerHTML =
-                        data1.estSubCount - data2.user.followerCount;
-                    });
+                        data1.estSubCount - subs;
                 });
             }, 2000);
 
@@ -80,15 +92,16 @@ document.getElementById("image2").src = data2.user.pfp;
   }
 
   function search2() {
-    const prompt = window.prompt("Enter account name or URL.");
+    const prompt = window.prompt("Enter account name.");
     if (prompt)
-    fetch(
-        `https://backend.mixerno.space/instagram/searchfull/${prompt}`
+      fetch(
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${prompt}`
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams.set("id", data.users[0].user_name)
-          window.location.href = "?" + searchParams.toString()
+          searchParams2.set("id2", data.results[0].id)
+          window.location.href = "?" + searchParams2.toString()
         });
+  }
   }
 </script>
