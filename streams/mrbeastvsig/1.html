@@ -209,6 +209,17 @@
                 place = `#${data.place}`
                 document.getElementById("igplace").textContent = place;
                 });
+
+    
+    fetch(
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("name2").textContent = data.results[0].name;
+            document.getElementById("username2").textContent = `@${data.results[0].username}`;
+            document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+        });
     
     setInterval(() => {
         fetch(
@@ -224,16 +235,6 @@
                 document.getElementById("igplace").textContent = place;
                 });
               }, 2000);
-
-    fetch(
-        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-            document.getElementById("name2").textContent = data.results[0].name;
-            document.getElementById("username2").textContent = `@${data.results[0].username}`;
-            document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-        });
     
     setInterval(() => {
                 fetch(
