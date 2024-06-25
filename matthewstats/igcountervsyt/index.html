@@ -37,32 +37,37 @@
   const id1 = searchParams1.get("id1") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
   const searchParams2 = new URLSearchParams(window.location.search);
   const id2 = searchParams2.get("id2") || "kendalljenner";
+    let subs
+    
   setInterval(() => {
     fetch(
       `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
     )
       .then((res) => res.json())
       .then((data1) => {
+          document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+            document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
+            document.getElementById("name1").textContent = data1.snippet.title;
+            document.getElementById("subs1").innerHTML = data1.estSubCount;
+            subs = data1.estSubCount
+          });
+            }, 2000);
+
+    setInterval(() => {
         fetch(
           `https://api-v2.nextcounts.com/api/instagram/user/${id2}`
         )
           .then((res) => res.json())
           .then((data2) => {
-            
-            document.getElementById("banner1").src = `https://banner.yt/${id1}`;
-            document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
-            document.getElementById("name1").textContent = data1.snippet.title;
-            document.getElementById("subs1").innerHTML = data1.estSubCount;
               document.getElementById("banner2").src = data2.user.banner;
-            
 document.getElementById("image2").src = data2.user.pfp;
             document.getElementById("name2").textContent = data2.user.name;
                 document.getElementById("subs2").innerHTML = data2.user.followerCount;
             document.getElementById("gap").innerHTML =
-                        data1.estSubCount - data2.user.followerCount;
-                    });
+                        data2.user.followerCount - subs;
                 });
             }, 2000);
+    
   function search1() {
     const prompt = window.prompt("Enter channel name, ID, or URL.");
     if (prompt)
