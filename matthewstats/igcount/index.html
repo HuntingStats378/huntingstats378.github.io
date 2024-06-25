@@ -23,17 +23,26 @@
 <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script><script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/highstock.js"></script>
 <script>
   const searchParams = new URLSearchParams(window.location.search);
-  const id = searchParams.get("id") || "natgeo";
+  const name = searchParams.get("id") || "MrBeast";
+    let tid
+
+    fetch(
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("name").textContent = data.results[0].name;
+            document.getElementById("banner").src = data.results[0].pfp
+            document.getElementById("image").src = data.results[0].pfp
+            tid = data.results[0].id;
+        });
 
   setInterval(() => {
         fetch(
-          `https://livecounts.xyz/api/instagram-live-follower-count/live/${id}`
+          `https://livecounts.xyz/api/instagram-live-follower-count/live/${tid}`
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("banner").src = "https://huntingstats378.github.io/HuntingStats378/main/images/default_banner.png";
-                document.getElementById("image").src = "https://huntingstats378.github.io/HuntingStats378/main/images/default.png";
-                document.getElementById("name").textContent = "hi name";
                 document.getElementById("subs").innerHTML = data.counts[0];
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
                 chart.series[0].addPoint([Date.now(), data.counts[0]])
@@ -100,20 +109,20 @@
           lineColor: '#FFFFFF'
       }]
   });
-  
+
       function search() {
-    const prompt = window.prompt("Enter account name or URL.");
+    const prompt = window.prompt("Enter account name.");
     if (prompt)
       fetch(
-        `https://backend.mixerno.space/instagram/searchfull/${prompt}`
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${prompt}`
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams.set("id", data.users[0].user_name)
+          searchParams.set("id", data.results[0].id)
           window.location.href = "?" + searchParams.toString()
         });
   }
-  
+
   function footer() {
     href("./../")
   }
