@@ -12,21 +12,21 @@
   <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script>
 </head>
 <body>
-    <div><span id="subs1" class="odometer">broken</span></div>
-    <div class="right"><span id="subs2" class="odometer">broken</span></div>
-    <div><span id="gap" class="odometer">broken</span></div>
-    <div><span id="views1" class="odometer">broken</span></div>
-    <div id="v1"><span id="views2" class="odometer">broken</span></div>
+    <div><span id="subs1" class="odometer">0</span></div>
+    <div class="right"><span id="subs2" class="odometer">0</span></div>
+    <div><span id="gap" class="odometer">0</span></div>
+    <div><span id="views1" class="odometer">0</span></div>
+    <div id="v1"><span id="views2" class="odometer">0</span></div>
     <div id="mb">
-        <div><span id="mbday" class="average odometer">broken</span></div>
-        <div><span id="mbhr" class="average odometer">broken</span></div>
-        <div><span id="mbmin" class="average odometer">broken</span>
+        <div><span id="mbday" class="average odometer">0</span></div>
+        <div><span id="mbhr" class="average odometer">0</span></div>
+        <div><span id="mbmin" class="average odometer">0</span>
         </div>
     </div>
-    <div id="ig"><span id="igplace">#broken</span>
+    <div id="ig"><span id="igplace">#00</span>
     </div>
-    <div><span id="subs3" class="odometer">broken</span></div>
-    <div><span id="subs4" class="odometer">broken</span></div>
+    <div><span id="subs3" class="odometer">0</span></div>
+    <div><span id="subs4" class="odometer">0</span></div>
     <div id="img"><img id="image1" src="https://huntingstats378.github.io/HuntingStats378/main/images/default.png">
     <img id="image2" src="https://huntingstats378.github.io/HuntingStats378/main/images/default.png"></div>
     <div id=name><span id="name1">Loading</span><br>
@@ -40,7 +40,7 @@
         font-weight: 700;
         font-family: Roboto;
         color: white;
-        background-color: transparent;
+        background-color: black;
     }
 
     #ape1 {
@@ -189,62 +189,69 @@
     var id3 = urlParams3.get("id3") || "UClOyuxZvQkoHoIn15kNbkUw";
     const urlParams4 = new URLSearchParams(window.location.search);
     var id4 = urlParams4.get("id4") || "UCVfKmfOY5SWfx_rt51oG92Q";
+    let id1
+    let id2
+    let pfp
+    let name
+    let username
+    let place
+    let subs
 
     setInterval(() => {
         fetch(
             "numbers.json"
           )
             .then((res) => res.json())
-            .then((datr) => {
-                const id1 = datr.one
-                const id2 = datr.username
-                const pfp = datr.pfp
-                const name = datr.name
-                const username = datr.username
-                const place = `#${datr.place}`
-                document.getElementById("image2").src = ${pfp};
-                document.getElementById("name2").textContent = ${name};
+            .then((data) => {
+                id1 = data.one
+                id2 = data.username
+                pfp = data.pfp
+                name = data.name
+                username = data.username
+                place = `#${data.place}`
+                document.getElementById("image2").src = pfp;
+                document.getElementById("name2").textContent = name;
                 document.getElementById("username2").textContent = `#${username}`;
-                document.getElementById("igplace").textContent = ${place};
+                document.getElementById("igplace").textContent = place;
                 });
               }, 2000);
-    
+
     setInterval(() => {
                 fetch(
                     `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
       )
         .then((res) => res.json())
         .then((data) => {
-            const subs = data.estSubCount
+            subs = data.estSubCount
             document.getElementById("image1").src = data.snippet.thumbnails.high.url;
             document.getElementById("name1").textContent = data.snippet.title;
             document.getElementById("username1").textContent = data.snippet.customUrl;
-            document.getElementById("subs1").innerHTML = ${subs}
+            document.getElementById("subs1").innerHTML = subs;
             document.getElementById("views1").innerHTML = data.estViewCount;
             });
               }, 2000);
-    
+
     setInterval(() => {
           fetch(
             `https://livecounts.xyz/api/instagram-live-follower-count/live/${id2}`
           )
             .then((res) => res.json())
             .then((data) => {
-              document.getElementById("subs2").innerHTML = counts[0];
-                document.getElementById("gap").innerHTML = ${subs} - counts[0];
-                  document.getElementById("views2").innerHTML = counts[2];
+              document.getElementById("subs2").innerHTML = data.counts[0];
+                document.getElementById("gap").innerHTML = subs - data.counts[0];
+                  document.getElementById("views2").innerHTML = data.counts[2];
                 });
               }, 2000);
-    
+
     setInterval(() => {
                 fetch(
                     `https://api.communitrics.com/mrbeaststats`
                   )
                     .then((res) => res.json())
                     .then((data) => {
-                            document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
-                            document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
-                            document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
+                            document.getElementById("mbday").innerHTML = (data.averageSubscribersGainedPerDay / 1);
+                            document.getElementById("mbhr").innerHTML = (data.averageSubscribersGainedPerDay / 24);
+                            document.getElementById("mbmin").innerHTML = (data.averageSubscribersGainedPerDay / 1440);
                     });
               }, 2000);
 
