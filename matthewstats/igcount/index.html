@@ -31,8 +31,8 @@
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("banner").src = "https://huntingstats378.github.io/HuntingStats378/images/default_banner.png";
-                document.getElementById("image").src = "https://huntingstats378.github.io/HuntingStats378/images/default.png";
+                document.getElementById("banner").src = "https://huntingstats378.github.io/HuntingStats378/main/images/default_banner.png";
+                document.getElementById("image").src = "https://huntingstats378.github.io/HuntingStats378/main/images/default.png";
                 document.getElementById("name").textContent = "hi name";
                 document.getElementById("subs").innerHTML = data.counts[0];
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
