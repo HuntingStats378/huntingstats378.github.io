@@ -212,6 +212,7 @@
                 });
               }, 2000);
 
+    setTimeout(() => {
     fetch(
         `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
       )
@@ -221,6 +222,7 @@
             document.getElementById("username2").textContent = `@${data.results[0].username}`;
             document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
         });
+        }, 2000);
     
     setInterval(() => {
                 fetch(
