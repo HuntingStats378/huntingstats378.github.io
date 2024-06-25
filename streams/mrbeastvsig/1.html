@@ -197,6 +197,19 @@
     let place
     let subs
 
+    fetch(
+            "numbers.json"
+          )
+            .then((res) => res.json())
+            .then((data) => {
+                id1 = data.one
+                id2 = data.username
+                pfp = data.pfp
+                name = data.username
+                place = `#${data.place}`
+                document.getElementById("igplace").textContent = place;
+                });
+    
     setInterval(() => {
         fetch(
             "numbers.json"
@@ -212,7 +225,6 @@
                 });
               }, 2000);
 
-    setTimeout(() => {
     fetch(
         `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
       )
@@ -281,5 +293,4 @@
                     document.getElementById("subs4").innerHTML = data.subcount;
               });
                   }, 2000);
-        }, 2000);
 </script>
