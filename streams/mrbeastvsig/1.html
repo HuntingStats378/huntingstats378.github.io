@@ -198,41 +198,54 @@
             .then((datr) => {
                 const id1 = datr.one
                 const id2 = datr.two
+                const pfp = datr.pfp
+                const name = datr.name
+                const username = datr.username
+                const place = `#${datr.place}`
+                document.getElementById("image2").src = ${pfp};
+                document.getElementById("name2").textContent = ${name};
+                document.getElementById("username2").textContent = ${username};
+                document.getElementById("igplace").textContent = ${place};
+                });
+              }, 2000);
+    
+    setInterval(() => {
                 fetch(
                     `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
       )
         .then((res) => res.json())
         .then((data) => {
+            const subs = data.estSubCount
+            document.getElementById("image1").src = data.snippet.thumbnails.high.url;
+            document.getElementById("name1").textContent = data.snippet.title;
+            document.getElementById("username1").textContent = data.snippet.customUrl;
+            document.getElementById("subs1").innerHTML = ${subs}
+            document.getElementById("views1").innerHTML = data.estViewCount;
+            });
+              }, 2000);
+    
+    setInterval(() => {
           fetch(
-            `numbers.json`
+            `https://livecounts.xyz/api/instagram-live-follower-count/live/${id2}`
           )
             .then((res) => res.json())
-            .then((date) => {
+            .then((data) => {
+              document.getElementById("subs2").innerHTML = counts[0];
+                document.getElementById("gap").innerHTML = ${subs} - counts[0];
+                  document.getElementById("views2").innerHTML = counts[2];
+                });
+              }, 2000);
+    
+    setInterval(() => {
                 fetch(
                     `https://api.communitrics.com/mrbeaststats`
                   )
                     .then((res) => res.json())
-                    .then((dataa) => {
-                                                document.getElementById("image1").src = data.snippet.thumbnails.high.url;
-                                                document.getElementById("image2").src = date.user.pfp;
-                                                document.getElementById("name1").textContent = data.snippet.title;
-                                        document.getElementById("name2").textContent = "no";
-                            document.getElementById("username1").textContent = data.snippet.customUrl;
-                            document.getElementById("username2").textContent = `@"no"`;
-                        document.getElementById("igplace").textContent = `#${datr.place}`;
-
-document.getElementById("subs1").innerHTML = data.estSubCount;
-              document.getElementById("subs2").innerHTML = "0";
-                document.getElementById("gap").innerHTML = data.estSubCount - "0";
-                document.getElementById("views1").innerHTML = data.estViewCount;
-                  document.getElementById("views2").innerHTML = "0";
+                    .then((data) => {
                             document.getElementById("mbday").innerHTML = (dataa.averageSubscribersGainedPerDay / 1);
                             document.getElementById("mbhr").innerHTML = (dataa.averageSubscribersGainedPerDay / 24);
                             document.getElementById("mbmin").innerHTML = (dataa.averageSubscribersGainedPerDay / 1440);
-        });
-          });
-        });
-          });
+                    });
               }, 2000);
 
     setInterval(() => {
@@ -241,14 +254,17 @@ document.getElementById("subs1").innerHTML = data.estSubCount;
           )
             .then((res) => res.json())
             .then((data) => {
+                document.getElementById("subs3").innerHTML = data.subcount;
+              });
+                  }, 2000);
+
+    setInterval(() => {
               fetch(
                 `https://api-v2.nextcounts.com/api/youtube/channel/${id4}`
               )
                 .then((res) => res.json())
-                .then((date) => {
-                    document.getElementById("subs3").innerHTML = data.subcount;
-                    document.getElementById("subs4").innerHTML = date.subcount;
-            });
+                .then((data) => {
+                    document.getElementById("subs4").innerHTML = data.subcount;
               });
                   }, 2000);
 </script>
