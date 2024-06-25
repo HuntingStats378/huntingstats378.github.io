@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 </head>
-
 <body style="font-family: Roboto; color: var(--fg-color, #fff); background-color: var(--bg-color, #E7541E);">
     <div style="height: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
         <div style="padding: 0px 4px; text-align: center; background-color: var(--counter-bg-color, black);">
@@ -37,47 +36,33 @@
   const searchParams1 = new URLSearchParams(window.location.search);
   const id1 = searchParams1.get("id1") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
   const searchParams2 = new URLSearchParams(window.location.search);
-  const name = searchParams2.get("id2") || "kendalljenner";
-    let tid
-    let subs
-
-    fetch(
-        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-            document.getElementById("name2").textContent = data.results[0].name;
-            document.getElementById("banner2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-            document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-            tid = data.results[0].id;
-        });
-
-    setInterval(() => {
-        fetch(
-          `https://livecounts.xyz/api/instagram-live-follower-count/live/${tid}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-                document.getElementById("subs2").innerHTML = data.counts[0];
-              subs = data.counts[0];
-                        });
-                }, 2000);
-    
+  const id2 = searchParams2.get("id2") || "kendalljenner";
   setInterval(() => {
     fetch(
       `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
     )
       .then((res) => res.json())
       .then((data1) => {
-        document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+        fetch(
+          `https://api-v2.nextcounts.com/api/instagram/user/${id2}`
+        )
+          .then((res) => res.json())
+          .then((data2) => {
+            
+            document.getElementById("banner1").src = `https://banner.yt/${id1}`;
             document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
             document.getElementById("name1").textContent = data1.snippet.title;
             document.getElementById("subs1").innerHTML = data1.estSubCount;
+              document.getElementById("banner2").src = data2.user.banner;
+            
+document.getElementById("image2").src = data2.user.pfp;
+            document.getElementById("name2").textContent = data2.user.name;
+                document.getElementById("subs2").innerHTML = data2.user.followerCount;
             document.getElementById("gap").innerHTML =
-                        subs - data1.estSubCount;
+                        data1.estSubCount - data2.user.followerCount;
+                    });
                 });
             }, 2000);
-
   function search1() {
     const prompt = window.prompt("Enter channel name, ID, or URL.");
     if (prompt)
@@ -90,16 +75,15 @@
           window.location.href = "?" + searchParams1.toString()
         });
   }
-
   function search2() {
     const prompt = window.prompt("Enter account name.");
     if (prompt)
-      fetch(
-        `https://livecounts.xyz/api/instagram-live-follower-count/search/${prompt}`
+    fetch(
+  `https://api-v2.nextcounts.com/api/search/instagram/user/${prompt}`
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams2.set("id2", data.results[0].id)
+          searchParams2.set("id", data.users[0].user_name)
           window.location.href = "?" + searchParams2.toString()
         });
   }
