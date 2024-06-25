@@ -91,7 +91,7 @@
                 .then((res) => res.json())
                 .then((datr) => {
                     const id1 = datr.one
-                    const id2 = datr.two
+                    const id2 = datr.username
                     fetch(
           `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
         )
