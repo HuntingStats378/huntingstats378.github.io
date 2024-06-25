@@ -48,7 +48,7 @@
         .then((data) => {
             document.getElementById("name2").textContent = data.results[0].name;
             document.getElementById("banner2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-            document.getElementById("image1").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+            document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
             tid = data.results[0].id;
         });
 
