@@ -238,7 +238,7 @@
             .then((res) => res.json())
             .then((data) => {
               document.getElementById("subs2").innerHTML = data.counts[0];
-                document.getElementById("gap").innerHTML = subs - data.counts[0];
+                document.getElementById("gap").innerHTML = data.counts[0] - subs;
                   document.getElementById("views2").innerHTML = data.counts[2];
                 });
               }, 2000);
