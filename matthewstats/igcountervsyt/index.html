@@ -59,12 +59,12 @@
         )
           .then((res) => res.json())
           .then((data2) => {
-              document.getElementById("banner2").src = data2.user.banner;
-document.getElementById("image2").src = data2.user.pfp;
-            document.getElementById("name2").textContent = data2.user.name;
-                document.getElementById("subs2").innerHTML = data2.user.followerCount;
+              document.getElementById("banner2").src = data2.userBanner;
+document.getElementById("image2").src = data2.avatar;
+            document.getElementById("name2").textContent = data2.nickname;
+                document.getElementById("subs2").innerHTML = data2.followers;
             document.getElementById("gap").innerHTML =
-                        data2.user.followerCount - subs;
+                        data2.followers - subs;
                 });
             }, 2000);
     
