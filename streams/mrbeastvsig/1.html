@@ -206,16 +206,24 @@
                 id1 = data.one
                 id2 = data.username
                 pfp = data.pfp
-                name = data.name
-                username = data.username
+                name = data.username
                 place = `#${data.place}`
-                document.getElementById("image2").src = pfp;
-                document.getElementById("name2").textContent = name;
-                document.getElementById("username2").textContent = `#${username}`;
                 document.getElementById("igplace").textContent = place;
                 });
               }, 2000);
 
+    let subs
+
+    fetch(
+        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("name2").textContent = data.results[0].name;
+            document.getElementById("username2").textContent = `#${data.results[0].username}`;
+            document.getElementById("image2").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+        });
+    
     setInterval(() => {
                 fetch(
                     `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
