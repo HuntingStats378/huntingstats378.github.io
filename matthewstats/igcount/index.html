@@ -32,8 +32,8 @@
         .then((res) => res.json())
         .then((data) => {
             document.getElementById("name").textContent = data.results[0].name;
-            document.getElementById("banner").src = data.results[0].pfp
-            document.getElementById("image").src = data.results[0].pfp
+            document.getElementById("banner").src = `https://livecounts.xyz/${data.results[0].pfp}`;
+            document.getElementById("image").src = `https://livecounts.xyz/${data.results[0].pfp}`;
             tid = data.results[0].id;
         });
 
