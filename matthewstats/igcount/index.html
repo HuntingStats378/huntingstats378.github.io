@@ -101,15 +101,15 @@ document.getElementById("image").src = data.avatar;
       }]
   });
 
-      function search() {
+  function search() {
     const prompt = window.prompt("Enter account name.");
     if (prompt)
-      fetch(
-        `https://livecounts.xyz/api/instagram-live-follower-count/search/${prompt}`
+    fetch(
+  `https://api-v2.nextcounts.com/api/search/instagram/user/${prompt}`
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams.set("id", data.results[0].id)
+          searchParams.set("id", data.users[0].user_name)
           window.location.href = "?" + searchParams.toString()
         });
   }
