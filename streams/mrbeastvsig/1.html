@@ -301,7 +301,7 @@ var db = {
             subs = data.estSubCount
 
               let vm = calcGain(db.subs, 30);
-              let vh = calcGain(db.subs);
+              let vh = calcGain(db.subs, 1800);
               document.getElementById('subs_min').textContent = calPrefixOfCount(vm)[0] + numberWithCommas(vm);
               document.getElementById('subs_min').style.color = calPrefixOfCount(vm)[1];
               document.getElementById('subs_hour').textContent = calPrefixOfCount(vh)[0] + numberWithCommas(vh);
