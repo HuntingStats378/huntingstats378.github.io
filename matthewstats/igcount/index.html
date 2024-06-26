@@ -23,29 +23,20 @@
 <script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.js"></script><script src="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/highstock.js"></script>
 <script>
   const searchParams = new URLSearchParams(window.location.search);
-  const name = searchParams.get("id") || "MrBeast";
-    let tid
+  const id = searchParams.get("id") || "MrBeast";
 
-    fetch(
-        `https://livecounts.xyz/api/instagram-live-follower-count/search/${name}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-            document.getElementById("name").textContent = data.results[0].name;
-            document.getElementById("banner").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-            document.getElementById("image").src = `https://livecounts.xyz/${data.results[0].pfp}`;
-            tid = data.results[0].id;
-        });
-
-  setInterval(() => {
+    setInterval(() => {
         fetch(
-          `https://livecounts.xyz/api/instagram-live-follower-count/live/${tid}`
+          `https://api-v2.nextcounts.com/api/instagram/user/${id}`
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("subs").innerHTML = data.counts[0];
+                ddocument.getElementById("banner").src = data.userBanner;
+document.getElementById("image").src = data.avatar;
+            document.getElementById("name").textContent = data.nickname;
+                document.getElementById("subs").innerHTML = data.followers;
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
-                chart.series[0].addPoint([Date.now(), data.counts[0]])
+                chart.series[0].addPoint([Date.now(), data.followers])
                         });
                 }, 2000);
 
