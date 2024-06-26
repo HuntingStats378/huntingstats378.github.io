@@ -183,20 +183,141 @@
                 });
                   }, 2000);
 
-    setInterval(() => {
-                fetch(
-                    `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
+var db = {
+    len: 0,
+    time: [],
+    subs: []
+  };
+
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function calcGain(arr, len) {
+    if (len !== undefined) {
+      if (arr.length > len) {
+        return arr[arr.length-1] - arr[((arr.length-1) - len)];
+      } else {
+        return arr[arr.length-1] - arr[0];
+      }
+    } else {
+      return arr[arr.length-1] - arr[0];
+    }
+  }
+
+  function calPrefixOfCount(x, gain, lose, none) {
+    gain = gain || "lime";
+    lose = lose || "red";
+    none = none || "white";
+    let count = parseFloat(x);
+    if (count > 0) {
+      return ["+",
+        gain];
+    } else if (count == 0) {
+      return ["+",
+        none];
+    } else {
+      return ["",
+        lose];
+    }
+  }
+
+  function ISO8601Duration(ISO) {
+    const units = {
+      "Y": 31536000,
+      "M": 2592000,
+      "D": 86400,
+      "H": 3600,
+      "M": 60,
+      "S": 1
+    }
+
+    const unitsKeys = Object.keys(units);
+    let newISO = ISO.replace("P", "").replace("T", "");
+    let foundedKeys = [];
+    let durationISO = [];
+
+    for (let i = 0; i < newISO.length; i++) {
+      if (unitsKeys.includes(newISO[i]) == true) {
+        foundedKeys.push(newISO[i]);
+        newISO = newISO.replace(newISO[i], " ");
+      }
+    }
+
+    newISO = newISO.split(" ");
+    newISO.pop();
+
+    for (let i = 0; i < foundedKeys.length; i++) {
+      durationISO[i] = Number(newISO[i]) * units[foundedKeys[i]];
+    }
+
+    let duration = durationISO.reduce((a, b) => a + b, 0);
+
+    return duration;
+  }
+
+
+
+  function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray): objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+      var line = '';
+      for (var index in array[i]) {
+        if (line != '') line += ','
+
+        line += array[i][index];
+      }
+
+      str += line + '\r\n';
+    }
+
+    return str;
+  }
+
+  setInterval(() => {
+        fetch(
+            `https://api.communitrics.com/mrbeaststats`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+                vd = Math.floor(data.averageSubscribersGainedPerDay);
+  });
+      }, 2000);
+
+  setInterval(() => {
+  fetch(
+          `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
       )
-        .then((res) => res.json())
-        .then((data) => {
+      .then((res) => res.json())
+      .then((data) => {
+              db.subs.push(data.estSubCount);
             document.getElementById("image1").src = data.snippet.thumbnails.high.url;
             document.getElementById("name1").textContent = data.snippet.title;
             document.getElementById("username1").textContent = data.snippet.customUrl;
             document.getElementById("subs1").innerHTML = data.estSubCount;
             document.getElementById("views1").innerHTML = data.estViewCount;
             subs = data.estSubCount
-            });
-              }, 2000);
+
+              let vm = calcGain(db.subs, 30);
+              let vh = calcGain(db.subs);
+              document.getElementById('subs_min').textContent = calPrefixOfCount(vm)[0] + numberWithCommas(vm);
+              document.getElementById('subs_min').style.color = calPrefixOfCount(vm)[1];
+              document.getElementById('subs_hour').textContent = calPrefixOfCount(vh)[0] + numberWithCommas(vh);
+              document.getElementById('subs_hour').style.color = calPrefixOfCount(vh)[1];
+        document.getElementById('subs_day').textContent = calPrefixOfCount(vd)[0] + numberWithCommas(vd);
+        document.getElementById('subs_day').style.color = calPrefixOfCount(vd)[1];
+
+              let viewsChartData = [];
+
+              for (let i = 0; i < db.subs.length; i++) {
+                viewsChartData[i] = [db.time[i],
+                  db.subs[i]];
+              }
+      });
+  }, 2000);
 
             setInterval(() => {
           fetch(
@@ -215,19 +336,6 @@
                                                 
                                                 
                 setInterval(() => {
-                fetch(
-                    `https://api.communitrics.com/mrbeaststats`
-                  )
-                    .then((res) => res.json())
-                    .then((data) => {
-                        document.getElementById("mbday").innerHTML = (data.averageSubscribersGainedPerDay / 1);
-                            document.getElementById("mbhr").innerHTML = (data.averageSubscribersGainedPerDay / 24);
-                            document.getElementById("mbmin").innerHTML = (data.averageSubscribersGainedPerDay / 1440);
-          });
-              }, 2000);
-
-
-    setInterval(() => {
           fetch(
             `https://api-v2.nextcounts.com/api/youtube/channel/${id3}`
           )
