@@ -31,7 +31,7 @@
         )
           .then((res) => res.json())
           .then((data) => {
-                ddocument.getElementById("banner").src = data.userBanner;
+                document.getElementById("banner").src = data.userBanner;
 document.getElementById("image").src = data.avatar;
             document.getElementById("name").textContent = data.nickname;
                 document.getElementById("subs").innerHTML = data.followers;
