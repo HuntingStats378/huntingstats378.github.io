@@ -740,8 +740,8 @@ var db = {
       var e = "" + t;
       return Math.abs(
         t -
-          (e.length > 6
-            ? 1e6 * (Math.floor(t / 1e6) + 1)
+          (e.length > 7
+            ? 1e7 * (Math.floor(t / 1e7) + 1)
             : (parseInt(e.charAt(0)) + 1) * Math.pow(10, e.length - 1))
       );
     }
@@ -752,8 +752,8 @@ var db = {
       if (count == null) return 0;
       if (10 > t) return 10;
       var e = "" + t;
-      return e.length > 6
-        ? 1e6 * (Math.floor(t / 1e6) + 1)
+      return e.length > 7
+        ? 1e7 * (Math.floor(t / 1e7) + 1)
         : (parseInt(e.charAt(0)) + 1) * Math.pow(10, e.length - 1);
     }
   setInterval(() => {
