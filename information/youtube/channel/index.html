@@ -34,8 +34,8 @@
                 )
                 .then((res) => res.json())
                 .then((data) => {
-                    document.getElementById("banner").textContent = `Profile Banner: ${data.snippet.banner}`;
-                    document.getElementById("image").textContent = `Profile Picture: ${data.snippet.thumbnails[2].url}`;
+                    document.getElementById("banner").textContent = `Profile Banner: https://banner.yt/${id}`;
+                    document.getElementById("image").textContent = `Profile Picture: ${data.snippet.thumbnails.high.url}`;
                     document.getElementById("name").textContent = `Profile Name: ${data.snippet.title}`;
                   document.getElementById("id").textContent = `Profile ID: ${id}`;
                 });
