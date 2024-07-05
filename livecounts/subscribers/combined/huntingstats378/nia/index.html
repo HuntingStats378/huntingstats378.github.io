@@ -16,7 +16,7 @@
             <img style="width: 125px; height: 125px; border-radius: 50%; margin-top: -5em; position: relative;" src="https://yt3.ggpht.com/zZa5_LIZoT_2TqhiNdterb2GFv7oZEI7QcgAJeLeD7_4aHVJZ1VZXciJ_ouplogGy_x-T6VrYw=s176-c-k-c0x00ffffff-no-rj">
             <h2 style="margin-top: 1px; font-size: var(--title-font-size, 4.5vh)">HuntingStats378 Combined</h2>
             <h2 id="subs" style="margin-top: -20px; font-size: var(--counter-font-size, 8vh)" class="odometer">0</h2>
-            <h5 onclick="footer()" style="margin-top: -40px;">Subscribers</h5>
+            <h5 onclick="footer()" style="margin-top: -40px;">Subscribers (YT Studio)</h5>
         </div>
     </div>
   <div id="chart" class="chart" style="background-color: black;"></div>
@@ -44,10 +44,10 @@
 
       async function datas() {
         for (let i = 0; i < Channels.length; i++) {
-  await fetch(`https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${Channels[i]}`)
+  await fetch(`https://studio.nia-statistics.com/api?id=${Channels[i]}`)
             .then((res) => res.json())
             .then((data) => {
-              work[i] = data.estSubCount;
+              work[i] = data.channels.counts[2].count;
 
             });
         }
