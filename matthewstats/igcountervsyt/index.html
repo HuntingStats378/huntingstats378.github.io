@@ -88,7 +88,7 @@ document.getElementById("image2").src = data2.avatar;
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams2.set("id", data.users[0].user_name)
+          searchParams2.set("id2", data.users[0].user_name)
           window.location.href = "?" + searchParams2.toString()
         });
   }
