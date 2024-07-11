@@ -190,6 +190,10 @@ setInterval(() => {
             credits: {
                 enabled: false,
             },
+            time: {
+                useUTC: false,
+                timezoneOffset: new Date().getTimezoneOffset()
+            },
             tooltip: {
                 shared: true,
                 formatter: function() {
@@ -312,6 +316,10 @@ setInterval(() => {
             },
             credits: {
                 enabled: false,
+            },
+            time: {
+                useUTC: false,
+                timezoneOffset: new Date().getTimezoneOffset()
             },
             tooltip: {
                 shared: true,
