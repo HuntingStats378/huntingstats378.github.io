@@ -855,7 +855,6 @@ document.getElementById("gap8").innerHTML = Math.floor(sd1 - data.channelDetails
               document.getElementById("image6").src = data.snippet.thumbnails.high.url;
               document.getElementById("name6").textContent = data.snippet.title;
               document.getElementById("username6").textContent = data.snippet.customUrl;
-              document.getElementById("subs8").textContent = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -868,7 +867,6 @@ document.getElementById("gap8").innerHTML = Math.floor(sd1 - data.channelDetails
               document.getElementById("image7").src = data.snippet.thumbnails.high.url;
               document.getElementById("name7").textContent = data.snippet.title;
               document.getElementById("username7").textContent = data.snippet.customUrl;
-              document.getElementById("subs9").textContent = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -881,7 +879,6 @@ document.getElementById("gap8").innerHTML = Math.floor(sd1 - data.channelDetails
               document.getElementById("image8").src = data.snippet.thumbnails.high.url;
               document.getElementById("name8").textContent = data.snippet.title;
               document.getElementById("username8").textContent = data.snippet.customUrl;
-              document.getElementById("subs10").textContent = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -894,7 +891,6 @@ document.getElementById("gap8").innerHTML = Math.floor(sd1 - data.channelDetails
               document.getElementById("image9").src = data.snippet.thumbnails.high.url;
               document.getElementById("name9").textContent = data.snippet.title;
               document.getElementById("username9").textContent = data.snippet.customUrl;
-              document.getElementById("subs11").textContent = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -986,7 +982,7 @@ setInterval(() => {
 
                 setInterval(() => {
           fetch(
-            `https://studio.nia-statistics.com/api?id=${id3}`
+            `https://studio.nia-statistics.com/api/channel/${id3}`
           )
             .then((res) => res.json())
             .then((data) => {
@@ -996,7 +992,7 @@ setInterval(() => {
 
     setInterval(() => {
       fetch(
-        `https://studio.nia-statistics.com/api?id=${id4}`
+        `https://studio.nia-statistics.com/api/channel/${id4}`
       )
         .then((res) => res.json())
         .then((data) => {

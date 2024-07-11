@@ -39,7 +39,7 @@
         });
 
         fetch(
-            `https://studio.nia-statistics.com/api?id=${id}`
+            `https://studio.nia-statistics.com/api/channel/${id}`
         )
         .then((res) => res.json())
         .then((data) => {
@@ -67,7 +67,7 @@ if (status == false) {
                     });
         } else { 
                 fetch(
-                        `https://studio.nia-statistics.com/api?id=${id}`
+                        `https://studio.nia-statistics.com/api/channel/${id}`
                     )
                     .then((res) => res.json())
                     .then((data) => {
