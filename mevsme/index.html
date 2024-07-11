@@ -86,31 +86,32 @@
 
         setInterval(() => {
             fetch(
-                    `https://api-v2.nextcounts.com/api/youtube/channel/${id1}`
+                    `https://studio.nia-statistics.com/api?id=${id1}`
                 )
                 .then((res) => res.json())
-                .then((data1) => {
+                .then((data) => {
+document.getElementById("image1").src = data.currentChannels.image;
+                            document.getElementById("name1").textContent = data.currentChannels.name;
+                            document.getElementById("subs1").innerHTML = data.channels.counts[2].count;
+                            if (chart1.series[0].points.length == 1500) chart1.series[0].data[0].remove();
+                            chart1.series[0].addPoint([Date.now(), data.channels.counts[2].count])
+                        });
+}, 2000);
+
+setInterval(() => {
                     fetch(
-                            `https://api-v2.nextcounts.com/api/youtube/channel/${id2}`
+                            `https://studio.nia-statistics.com/api?id=${id2}`
                         )
                         .then((res) => res.json())
-                        .then((data2) => {
-
-                            document.getElementById("image1").src = data1.userImg;
-                            document.getElementById("name1").textContent = data1.username;
-                            document.getElementById("subs1").innerHTML = data1.subcount;
-                            if (chart1.series[0].points.length == 1500) chart1.series[0].data[0].remove();
-                            chart1.series[0].addPoint([Date.now(), data1.subcount])
-
-                            document.getElementById("image2").src = data2.userImg;
-                            document.getElementById("name2").textContent = data2.username;
-                            document.getElementById("subs2").innerHTML = data2.subcount;
+                        .then((data) => {
+                            document.getElementById("image2").src = data.currentChannels.image;
+                            document.getElementById("name2").textContent = data.currentChannels.name;
+                            document.getElementById("subs2").innerHTML = data.channels.counts[2].count;
                             if (chart2.series[0].points.length == 1500) chart2.series[0].data[0].remove();
-                            chart2.series[0].addPoint([Date.now(), data2.subcount])
+                            chart2.series[0].addPoint([Date.now(), data.channels.counts[2].count])
                         });
-                });
-        }, 2000);
-
+                    }, 2000);
+        
         const chart1 = new Highcharts.chart({
             chart: {
                 renderTo: "chart1",
