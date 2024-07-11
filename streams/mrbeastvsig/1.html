@@ -982,7 +982,7 @@ setInterval(() => {
 
                 setInterval(() => {
           fetch(
-            `https://studio.nia-statistics.com/api/channel/${id3}`
+            `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id3}`
           )
             .then((res) => res.json())
             .then((data) => {
@@ -992,7 +992,7 @@ setInterval(() => {
 
     setInterval(() => {
       fetch(
-        `https://studio.nia-statistics.com/api/channel/${id4}`
+        `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id4}`
       )
         .then((res) => res.json())
         .then((data) => {
