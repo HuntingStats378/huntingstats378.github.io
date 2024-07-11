@@ -39,7 +39,7 @@
         });
 
         fetch(
-            `https://studio.nia-statistics.com/api/channel/${id}`
+            `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id}`
         )
         .then((res) => res.json())
         .then((data) => {
@@ -49,7 +49,7 @@
         setInterval(() => {
 if (status == false) {
                 fetch(
-                        `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id}`
+                        `https://corsproxy.io/?https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id}`
                     )
                     .then((res) => res.json())
                     .then((data) => {
@@ -61,7 +61,7 @@ if (status == false) {
                     });
         } else { 
                 fetch(
-                        `https://studio.nia-statistics.com/api/channel/${id}`
+                        `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id}`
                     )
                     .then((res) => res.json())
                     .then((data) => {
