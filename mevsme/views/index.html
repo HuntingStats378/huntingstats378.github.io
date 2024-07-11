@@ -1,7 +1,7 @@
 <head>
     <title>HuntingStats378 - Compare</title>
     <link href="https://huntingstats378.github.io/HuntingStats378/main/assets/ess/odometer.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link rel="icon" href="https://huntingstats378.github.io/HuntingStats378/main/images/logo.png">
     <meta charSet="utf-8" />
     <meta name="description" content="HuntingStats378 - Compare" />
@@ -54,7 +54,7 @@
             <img id="image1" src="https://huntingstats378.github.io/HuntingStats378/main/images/default.png">
             <h2 id="name1" onclick="search1()">Loading</h2>
             <h2 id="subs1" class="odometer">0</h2>
-            <h5 id="footer1">Subscribers</h5>
+            <h5 id="footer1">Views</h5>
             <div class="chart-area">
                 <div class="chart-text-area">
                     <p class="channel-growth-label">Channel growth</p>
@@ -67,7 +67,7 @@
             <img id="image2" src="https://huntingstats378.github.io/HuntingStats378/main/images/default.png">
             <h2 id="name2" onclick="search2()">Loading</h2>
             <h2 id="subs2" class="odometer">0</h2>
-            <h5 id="footer2">Subscribers</h5>
+            <h5 id="footer2">Views</h5>
                         <div class="chart-area">
                             <div class="chart-text-area">
                                 <p class="channel-growth-label">Channel growth</p>
@@ -92,9 +92,9 @@
                 .then((data) => {
 document.getElementById("image1").src = data.currentChannels.image;
                             document.getElementById("name1").textContent = data.currentChannels.name;
-                            document.getElementById("subs1").innerHTML = data.channels.counts[2].count;
+                            document.getElementById("subs1").innerHTML = data.channels.counts[1].count;
                             if (chart1.series[0].points.length == 1500) chart1.series[0].data[0].remove();
-                            chart1.series[0].addPoint([Date.now(), data.channels.counts[2].count])
+                            chart1.series[0].addPoint([Date.now(), data.channels.counts[1].count])
                         });
 }, 2000);
 
@@ -106,9 +106,9 @@ setInterval(() => {
                         .then((data) => {
                             document.getElementById("image2").src = data.currentChannels.image;
                             document.getElementById("name2").textContent = data.currentChannels.name;
-                            document.getElementById("subs2").innerHTML = data.channels.counts[2].count;
+                            document.getElementById("subs2").innerHTML = data.channels.counts[1].count;
                             if (chart2.series[0].points.length == 1500) chart2.series[0].data[0].remove();
-                            chart2.series[0].addPoint([Date.now(), data.channels.counts[2].count])
+                            chart2.series[0].addPoint([Date.now(), data.channels.counts[1].count])
                         });
                     }, 2000);
         
@@ -225,7 +225,7 @@ setInterval(() => {
             },
             series: [{
                 showInLegend: false,
-                name: "Subscribers",
+                name: "Views",
                 marker: {
                     enabled: false
                 },
@@ -348,7 +348,7 @@ setInterval(() => {
             },
             series: [{
                 showInLegend: false,
-                name: "Subscribers",
+                name: "Views",
                 marker: {
                     enabled: false
                 },
