@@ -100,7 +100,7 @@ document.getElementById("image1").src = data.currentChannels.image;
 
 setInterval(() => {
                     fetch(
-                            `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/?${id2}`
+                            `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id2}`
                         )
                         .then((res) => res.json())
                         .then((data) => {
