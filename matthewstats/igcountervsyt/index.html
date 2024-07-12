@@ -37,21 +37,63 @@
   const id1 = searchParams1.get("id1") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
   const searchParams2 = new URLSearchParams(window.location.search);
   const id2 = searchParams2.get("id2") || "kendalljenner";
-    let subs
-    
-  setInterval(() => {
-    fetch(
-      `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
-    )
-      .then((res) => res.json())
-      .then((data1) => {
-          document.getElementById("banner1").src = `https://banner.yt/${id1}`;
-            document.getElementById("image1").src = data1.snippet.thumbnails.high.url;
-            document.getElementById("name1").textContent = data1.snippet.title;
-            document.getElementById("subs1").innerHTML = data1.estSubCount;
-            subs = data1.estSubCount
-          });
-            }, 2000);
+  let status1
+        let status2
+        let subs1
+        let subs2
+
+                fetch(
+                    `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id1}`
+                )
+                .then((res) => res.json())
+                .then((data) => {
+                    status1 = data.success;
+                    });
+
+                fetch(
+                    `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
+                )
+                .then((res) => res.json())
+                .then((data) => {
+                    document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+                    document.getElementById("image1").src = data.snippet.thumbnails.high.url;
+                    document.getElementById("name1").textContent = data.snippet.title;
+                });
+
+    setInterval(() => {
+        if (status1 == false) {
+                        fetch(
+                                `https://nia-statistics.com/api/get?platform=youtube&type=channel&id=${id1}`
+                            )
+                            .then((res) => res.json())
+                            .then((data) => {
+                                document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+                                document.getElementById("image1").src = data.snippet.thumbnails.high.url;
+                                document.getElementById("name1").textContent = data.snippet.title;
+                                document.getElementById("subs1").innerHTML = data.estSubCount;
+                                subs1 = data.estSubCount;
+                                if (id1 == "UCX6OQ3DkcsbYNE6H8uQQuVA") {
+                                document.getElementById("footer1").textContent = "Subscribers (YT Studio)";
+                                } else {
+                                document.getElementById("footer1").textContent = "Subscribers (Estimated)";
+                                }
+                            });
+                } else { 
+                        fetch(
+                                `https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/${id1}`
+                            )
+                            .then((res) => res.json())
+                            .then((data) => {
+                                document.getElementById("banner1").src = `https://banner.yt/${id1}`;
+                                document.getElementById("image1").src = data.currentChannels.image;
+                                document.getElementById("name1").textContent = data.currentChannels.name;
+                                document.getElementById("subs1").innerHTML = data.channels.counts[2].count;
+                                subs1 = data.channels.counts[2].count;
+                                document.getElementById("footer1").textContent = "Subscribers (YT Studio)";
+                                status1 = data.success;
+                            });
+                }
+                    }, 2000);
 
     setInterval(() => {
         fetch(
@@ -64,9 +106,13 @@ document.getElementById("image2").src = data2.avatar;
             document.getElementById("name2").textContent = data2.nickname;
                 document.getElementById("subs2").innerHTML = data2.followers;
             document.getElementById("gap").innerHTML =
-                        data2.followers - subs;
+                        subs2 = data2.followers;
                 });
             }, 2000);
+    
+    setInterval(() => {
+            document.getElementById("gap").innerHTML = subs1 - subs2;
+                    }, 2000);
     
   function search1() {
     const prompt = window.prompt("Enter channel name, ID, or URL.");
