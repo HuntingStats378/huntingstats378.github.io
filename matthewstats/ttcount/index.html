@@ -121,7 +121,7 @@
       )
         .then((res) => res.json())
         .then((data) => {
-          searchParams.set("id", data.nickname)
+          searchParams.set("id", data.uniqueId)
           window.location.href = "?" + searchParams.toString()
         });
   }
