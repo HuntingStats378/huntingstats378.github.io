@@ -30,11 +30,11 @@
 <script>
   setInterval(() => {
       fetch(
-              "https://api-v2.nextcounts.com/api/youtube/channel/UClOyuxZvQkoHoIn15kNbkUw"
+              "https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/UClOyuxZvQkoHoIn15kNbkUw"
           )
           .then((res) => res.json())
           .then((data) => {
-                      document.getElementById("count").innerHTML = data.subcount;
+                      document.getElementById("count").innerHTML = data.channels.counts[2].count;
           });
   }, 2000);
 </script>
