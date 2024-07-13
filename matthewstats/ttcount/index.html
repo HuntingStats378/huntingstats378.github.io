@@ -24,7 +24,10 @@
 <script>
   const searchParams = new URLSearchParams(window.location.search);
   const name = searchParams.get("id") || "MrBeast";
-    let tid
+    let tid;
+    var pfp;
+    var count;
+    var banner;
 
     fetch(
         `https://countik.com/api/exist/${name}`
@@ -42,11 +45,14 @@
         )
           .then((res) => res.json())
           .then((data) => {
-                document.getElementById("banner").src = data.avatarThumb;
-                document.getElementById("image").src = data.avatarThumb;
-                document.getElementById("subs").innerHTML = data.followerCount;
+              banner = data.avatarThumb; 
+              pfp = data.avatarThumb;
+              count = data.followerCount;
+                document.getElementById("banner").src = banner;
+                document.getElementById("image").src = pfp;
+                document.getElementById("subs").innerHTML = count;
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
-                chart.series[0].addPoint([Date.now(), data.followerCount])
+                chart.series[0].addPoint([Date.now(), count])
                         });
                 }, 2000);
 
