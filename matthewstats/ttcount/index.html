@@ -45,9 +45,9 @@
               if (data.status == "success") {
                 document.getElementById("banner").src = data.avatarThumb;
                 document.getElementById("image").src = data.avatarThumb;
-                document.getElementById("subs").innerHTML = followerCount;
+                document.getElementById("subs").innerHTML = data.followerCount;
                 if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
-                chart.series[0].addPoint([Date.now(), followerCount])
+                chart.series[0].addPoint([Date.now(), data.followerCount])
               }
                         });
                 }, 2000);
