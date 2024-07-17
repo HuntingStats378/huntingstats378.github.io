@@ -57,6 +57,8 @@ if (status == false) {
                         document.getElementById("image").src = data.snippet.thumbnails.high.url;
                         document.getElementById("name").textContent = data.snippet.title;
                         document.getElementById("views").innerHTML = data.estViewCount;
+                        if (chart.series[0].points.length == 1500) chart.series[0].data[0].remove();
+                        chart.series[0].addPoint([Date.now(), data.estViewCount])
                         document.getElementById("footer").textContent = "Views (Estimated)";
                     });
         } else { 
