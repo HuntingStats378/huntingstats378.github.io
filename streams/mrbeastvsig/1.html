@@ -780,7 +780,7 @@ var db = {
                     sh2 = Math.floor(data.channelDetails.mostRecentAverage / 24);
                     sm2 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
                     document.getElementById("subs8").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
-                    document.getElementById("gap5").innerHTML = Math.floor(sd1 - data.channelDetails.mostRecentAverage);
+                    document.getElementById("gap5").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
                     document.getElementById('subs_min2').textContent = calPrefixOfCount(sm2)[0] + numberWithCommas(sm2);
                                   document.getElementById('subs_min2').style.color = calPrefixOfCount(sm2)[1];
                                   document.getElementById('subs_hour2').textContent = calPrefixOfCount(sh2)[0] + numberWithCommas(sh2);
@@ -800,7 +800,7 @@ var db = {
             sh3 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm3 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
             document.getElementById("subs9").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
-document.getElementById("gap6").innerHTML = Math.floor(sd1 - data.channelDetails.mostRecentAverage);
+document.getElementById("gap6").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min3').textContent = calPrefixOfCount(sm3)[0] + numberWithCommas(sm3);
                           document.getElementById('subs_min3').style.color = calPrefixOfCount(sm3)[1];
                           document.getElementById('subs_hour3').textContent = calPrefixOfCount(sh3)[0] + numberWithCommas(sh3);
@@ -820,7 +820,7 @@ document.getElementById("gap6").innerHTML = Math.floor(sd1 - data.channelDetails
             sh4 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm4 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
             document.getElementById("subs10").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
-document.getElementById("gap7").innerHTML = Math.floor(sd1 - data.channelDetails.mostRecentAverage);
+document.getElementById("gap7").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min4').textContent = calPrefixOfCount(sm4)[0] + numberWithCommas(sm4);
                           document.getElementById('subs_min4').style.color = calPrefixOfCount(sm4)[1];
                           document.getElementById('subs_hour4').textContent = calPrefixOfCount(sh4)[0] + numberWithCommas(sh4);
@@ -840,7 +840,7 @@ document.getElementById("gap7").innerHTML = Math.floor(sd1 - data.channelDetails
             sh5 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm5 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
             document.getElementById("subs11").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
-document.getElementById("gap8").innerHTML = Math.floor(sd1 - data.channelDetails.mostRecentAverage);
+document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min5').textContent = calPrefixOfCount(sm5)[0] + numberWithCommas(sm5);
                           document.getElementById('subs_min5').style.color = calPrefixOfCount(sm5)[1];
                           document.getElementById('subs_hour5').textContent = calPrefixOfCount(sh5)[0] + numberWithCommas(sh5);
@@ -910,7 +910,6 @@ setInterval(() => {
             document.getElementById("name1").textContent = data.snippet.title;
             document.getElementById("username1").textContent = data.snippet.customUrl;
             document.getElementById("subs1").innerHTML = data.estSubCount;
-            document.getElementById("views1").innerHTML = data.estViewCount;
           document.getElementById("goal").innerHTML = GetGoal(data.estSubCount);
             document.getElementById(
               "goalText"
@@ -1020,4 +1019,88 @@ setInterval(() => {
                     document.getElementById("subs4").innerHTML = data.channels.counts[2].count;
           });
               }, 2000);
+
+  let gain = sd0;
+  let myVariable1 = 0;
+  let myVariable2 = 0;
+  let myVariable3 = 0;
+  let incrementAmount1 = 0;
+  let incrementAmount2 = 0;
+  let incrementAmount3 = 0;
+  let combined2 = [0, 0, 0]; // Initialize combined2 to prevent reference error
+
+  fetch(`https://api.communitrics.com/combined-history`)
+  .then((res) => res.json())
+  .then((data) => {
+      const lastItemLol = data[data.length - 1];
+
+          myVariable1 = lastItemLol.views;
+      myVariable2 = lastItemLol.likes;
+      myVariable3 = lastItemLol.comments;
+      });
+
+  // Function to fetch data and update the increment amount
+  function fetchDataAndUpdateIncrement() {
+      return fetch(`https://api.communitrics.com/combined-history`)
+          .then((res) => res.json())
+          .then((data) => {
+              const lastItem = data[data.length - 1];
+              const lastTime = data[data.length - 2];
+
+              const vc0 = lastItem.views;
+              const lc0 = lastItem.likes;
+              const cc0 = lastItem.comments;
+              const tc0 = (new Date(lastItem.time).getTime() / 1000);
+
+              const vl0 = lastTime.views;
+              const ll0 = lastTime.likes;
+              const cl0 = lastTime.comments;
+              const tl0 = (new Date(lastTime.time).getTime() / 1000);
+
+             if ((Math.floor(new Date().getTime() / 1000) * 1000) - (Math.floor(new Date(lastItem.time).getTime() / 1000) * 1000) < 5000) {
+                 myVariable1 = vc0;
+                 myVariable2 = lc0;
+                 myVariable3 = cc0;
+             }
+
+              const combined1 = [
+                  (vc0 - vl0),
+                  (lc0 - ll0),
+                  (cc0 - cl0),
+                  (Math.floor(tc0 - tl0))
+              ];
+              console.log(combined1);
+
+              combined2 = [
+                  (combined1[0] / combined1[3] * 2 / 5 * 4),
+                  (combined1[1] / combined1[3] * 2 / 5 * 4),
+                  (combined1[2] / combined1[3] * 2 / 5 * 4)
+              ];
+              console.log(combined2);
+
+              incrementAmount1 = combined2[0]; // Set myVariable to the value of vc0
+              incrementAmount2 = combined2[1]; // Set myVariable to the value of vc0
+              incrementAmount3 = combined2[2]; // Set myVariable to the value of vc0
+          })
+          .catch((error) => {
+              console.error('Fetch error:', error);
+          });
+  }
+
+  // Function to increment the variable
+  function incrementVariable() {
+      myVariable1 += incrementAmount1;
+      myVariable2 += incrementAmount2;
+      myVariable3 += incrementAmount3;
+      views1.innerHTML = Math.floor(myVariable1);
+  }
+
+  // Fetch data initially and set the increment amount, then start the intervals
+  fetchDataAndUpdateIncrement().then(() => {
+      // Update the increment amount every 2 seconds
+      setInterval(fetchDataAndUpdateIncrement, 2000);
+
+      // Increment the variable every 2 seconds
+      setInterval(incrementVariable, 2000);
+  });
 </script>
