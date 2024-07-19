@@ -101,7 +101,7 @@
         font-weight: 700;
         font-family: Roboto;
         color: white;
-        background-color: transparent;
+        background-color: black;
     }
 
     #ape1 {
@@ -768,7 +768,7 @@ var db = {
               sh0 = Math.floor(data.hourlystats.totalSubscribersGained);
                 sm0 = Math.floor(data.hourlystats.totalSubscribersGained / 60);
   });
-      }, 2000);
+      }, 10000);
 
     setInterval(() => {
             fetch(
@@ -779,7 +779,6 @@ var db = {
                     sd2 = Math.floor(data.channelDetails.mostRecentAverage / 1);
                     sh2 = Math.floor(data.channelDetails.mostRecentAverage / 24);
                     sm2 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
-                    document.getElementById("subs8").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
                     document.getElementById("gap5").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
                     document.getElementById('subs_min2').textContent = calPrefixOfCount(sm2)[0] + numberWithCommas(sm2);
                                   document.getElementById('subs_min2').style.color = calPrefixOfCount(sm2)[1];
@@ -788,7 +787,7 @@ var db = {
                             document.getElementById('subs_day2').textContent = calPrefixOfCount(sd2)[0] + numberWithCommas(sd2);
                             document.getElementById('subs_day2').style.color = calPrefixOfCount(sd2)[1];
                           });
-                      }, 2000);
+                      }, 10000);
 
     setInterval(() => {
     fetch(
@@ -799,7 +798,6 @@ var db = {
             sd3 = Math.floor(data.channelDetails.mostRecentAverage / 1);
             sh3 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm3 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
-            document.getElementById("subs9").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
 document.getElementById("gap6").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min3').textContent = calPrefixOfCount(sm3)[0] + numberWithCommas(sm3);
                           document.getElementById('subs_min3').style.color = calPrefixOfCount(sm3)[1];
@@ -808,7 +806,7 @@ document.getElementById("gap6").innerHTML = Math.floor(gain - data.channelDetail
                     document.getElementById('subs_day3').textContent = calPrefixOfCount(sd3)[0] + numberWithCommas(sd3);
                     document.getElementById('subs_day3').style.color = calPrefixOfCount(sd3)[1];
                   });
-              }, 2000);
+              }, 10000);
 
     setInterval(() => {
     fetch(
@@ -819,7 +817,6 @@ document.getElementById("gap6").innerHTML = Math.floor(gain - data.channelDetail
             sd4 = Math.floor(data.channelDetails.mostRecentAverage / 1);
             sh4 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm4 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
-            document.getElementById("subs10").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
 document.getElementById("gap7").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min4').textContent = calPrefixOfCount(sm4)[0] + numberWithCommas(sm4);
                           document.getElementById('subs_min4').style.color = calPrefixOfCount(sm4)[1];
@@ -828,7 +825,7 @@ document.getElementById("gap7").innerHTML = Math.floor(gain - data.channelDetail
                     document.getElementById('subs_day4').textContent = calPrefixOfCount(sd4)[0] + numberWithCommas(sd4);
                     document.getElementById('subs_day4').style.color = calPrefixOfCount(sd4)[1];
                   });
-              }, 2000);
+              }, 10000);
 
     setInterval(() => {
     fetch(
@@ -839,7 +836,6 @@ document.getElementById("gap7").innerHTML = Math.floor(gain - data.channelDetail
             sd5 = Math.floor(data.channelDetails.mostRecentAverage / 1);
             sh5 = Math.floor(data.channelDetails.mostRecentAverage / 24);
             sm5 = Math.floor(data.channelDetails.mostRecentAverage / 1440);
-            document.getElementById("subs11").innerHTML = Math.floor(data.channelDetails.linearEstSubscriberCount);
 document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetails.mostRecentAverage);
             document.getElementById('subs_min5').textContent = calPrefixOfCount(sm5)[0] + numberWithCommas(sm5);
                           document.getElementById('subs_min5').style.color = calPrefixOfCount(sm5)[1];
@@ -848,7 +844,7 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
                     document.getElementById('subs_day5').textContent = calPrefixOfCount(sd5)[0] + numberWithCommas(sd5);
                     document.getElementById('subs_day5').style.color = calPrefixOfCount(sd5)[1];
                   });
-              }, 2000);
+              }, 10000);
 
     setInterval(() => {
       fetch(
@@ -859,6 +855,7 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
               document.getElementById("image6").src = data.snippet.thumbnails.high.url;
               document.getElementById("name6").textContent = data.snippet.title;
               document.getElementById("username6").textContent = data.snippet.customUrl;
+              document.getElementById("subs8").innerHTML = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -871,6 +868,7 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
               document.getElementById("image7").src = data.snippet.thumbnails.high.url;
               document.getElementById("name7").textContent = data.snippet.title;
               document.getElementById("username7").textContent = data.snippet.customUrl;
+                document.getElementById("subs9").innerHTML = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -883,6 +881,7 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
               document.getElementById("image8").src = data.snippet.thumbnails.high.url;
               document.getElementById("name8").textContent = data.snippet.title;
               document.getElementById("username8").textContent = data.snippet.customUrl;
+                document.getElementById("subs10").innerHTML = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -895,6 +894,7 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
               document.getElementById("image9").src = data.snippet.thumbnails.high.url;
               document.getElementById("name9").textContent = data.snippet.title;
               document.getElementById("username9").textContent = data.snippet.customUrl;
+                document.getElementById("subs11").innerHTML = data.estSubCount_linear;
                     });
                 }, 2000);
 
@@ -1041,7 +1041,7 @@ setInterval(() => {
 
   // Function to fetch data and update the increment amount
   function fetchDataAndUpdateIncrement() {
-      return fetch(`https://api.communitrics.com/combined-history`)
+      return fetch(`https://api.communitrics.com/combined-history?recent=true`)
           .then((res) => res.json())
           .then((data) => {
               const lastItem = data[data.length - 1];
@@ -1057,7 +1057,7 @@ setInterval(() => {
               const cl0 = lastTime.comments;
               const tl0 = (new Date(lastTime.time).getTime() / 1000);
 
-             if ((Math.floor(new Date().getTime() / 1000) * 1000) - (Math.floor(new Date(lastItem.time).getTime() / 1000) * 1000) < 5000) {
+             if ((Math.floor(new Date().getTime() / 1000) * 1000) - (Math.floor(new Date(lastItem.time).getTime() / 1000) * 1000) < 12000) {
                  myVariable1 = vc0;
                  myVariable2 = lc0;
                  myVariable3 = cc0;
@@ -1098,7 +1098,7 @@ setInterval(() => {
   // Fetch data initially and set the increment amount, then start the intervals
   fetchDataAndUpdateIncrement().then(() => {
       // Update the increment amount every 2 seconds
-      setInterval(fetchDataAndUpdateIncrement, 2000);
+      setInterval(fetchDataAndUpdateIncrement, 10000);
 
       // Increment the variable every 2 seconds
       setInterval(incrementVariable, 2000);
