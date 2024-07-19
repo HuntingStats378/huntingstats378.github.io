@@ -278,53 +278,53 @@
     
     setInterval(() => {
     fetch(
-      `https://api.communitrics.com/${id8}?averages=true`
+      `https://axern.space/api/get?platform=youtube&type=channel&id=${id8}`
     )
       .then((res) => res.json())
       .then((data) => {
-            db.subs6.push(data.channelDetails.linearEstSubscriberCount);
+            db.subs6.push(data.estSubCount_linear);
             let change6 = calcGain(db.subs6, 1);
                     if (chart7.series[0].points.length == 1500) chart7.series[0].data[0].remove();
-                    chart7.series[0].addPoint([Date.now(), data.channelDetails.linearEstSubscriberCount])
+                    chart7.series[0].addPoint([Date.now(), data.estSubCount_linear])
     });
         }, 2000);
 
     setInterval(() => {
     fetch(
-      `https://api.communitrics.com/${id9}?averages=true`
+      `https://axern.space/api/get?platform=youtube&type=channel&id=${id9}`
     )
       .then((res) => res.json())
       .then((data) => {
-          db.subs7.push(data.channelDetails.linearEstSubscriberCount);
+          db.subs7.push(data.estSubCount_linear);
             let change7 = calcGain(db.subs7, 1);
                     if (chart8.series[0].points.length == 1500) chart8.series[0].data[0].remove();
-                    chart8.series[0].addPoint([Date.now(), data.channelDetails.linearEstSubscriberCount])
+                    chart8.series[0].addPoint([Date.now(), data.estSubCount_linear])
     });
         }, 2000);
 
     setInterval(() => {
     fetch(
-      `https://api.communitrics.com/${id10}?averages=true`
+      `https://axern.space/api/get?platform=youtube&type=channel&id=${id10}`
     )
       .then((res) => res.json())
       .then((data) => {
-          db.subs8.push(data.channelDetails.linearEstSubscriberCount);
+          db.subs8.push(data.estSubCount_linear);
             let change8 = calcGain(db.subs8, 1);
                     if (chart9.series[0].points.length == 1500) chart9.series[0].data[0].remove();
-                    chart9.series[0].addPoint([Date.now(), data.channelDetails.linearEstSubscriberCount])
+                    chart9.series[0].addPoint([Date.now(), data.estSubCount_linear])
     });
         }, 2000);
 
     setInterval(() => {
     fetch(
-      `https://api.communitrics.com/${id11}?averages=true`
+      `https://axern.space/api/get?platform=youtube&type=channel&id=${id11}`
     )
       .then((res) => res.json())
       .then((data) => {
-          db.subs9.push(data.channelDetails.linearEstSubscriberCount);
+          db.subs9.push(data.estSubCount_linear);
             let change9 = calcGain(db.subs9, 1);
                     if (chart10.series[0].points.length == 1500) chart10.series[0].data[0].remove();
-                    chart10.series[0].addPoint([Date.now(), data.channelDetails.linearEstSubscriberCount])
+                    chart10.series[0].addPoint([Date.now(), data.estSubCount_linear])
     });
         }, 2000);
     
