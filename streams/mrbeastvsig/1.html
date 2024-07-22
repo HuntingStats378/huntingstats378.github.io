@@ -900,21 +900,21 @@ document.getElementById("gap8").innerHTML = Math.floor(gain - data.channelDetail
 
 setInterval(() => {
   fetch(
-          `https://axern.space/api/get?platform=youtube&type=channel&id=${id1}`
+          `https://mixerno.space/api/youtube-channel-counter/user/${id1}`
       )
       .then((res) => res.json())
       .then((data) => {
-              db.subs1.push(data.estSubCount);
+              db.subs1.push(data.counts[0].count);
           db.time.push(Date.now());
-            document.getElementById("image1").src = data.snippet.thumbnails.high.url;
-            document.getElementById("name1").textContent = data.snippet.title;
-            document.getElementById("username1").textContent = data.snippet.customUrl;
-            document.getElementById("subs1").innerHTML = data.estSubCount;
-          document.getElementById("goal").innerHTML = GetGoal(data.estSubCount);
+            document.getElementById("image1").src = data.user[1].count;
+            document.getElementById("name1").textContent = data.user[0].count;
+            document.getElementById("username1").textContent = "@mrbeast";
+            document.getElementById("subs1").innerHTML = data.counts[0].count;
+          document.getElementById("goal").innerHTML = GetGoal(data.counts[0].count);
             document.getElementById(
               "goalText"
-            ).textContent = `Next Milestone: ${(GetGoal2(data.estSubCount) / 1000000)}M`;
-            subs = data.estSubCount
+            ).textContent = `Next Milestone: ${(GetGoal2(data.counts[0].count) / 1000000)}M`;
+            subs = data.counts[0].count
 
               let sm1 = calcGain(db.subs1, 30);
               let sh1 = calcGain(db.subs1, 1800);
