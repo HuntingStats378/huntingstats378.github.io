@@ -73,6 +73,7 @@
   -ms-transition: -ms-transform var(--speed);
   -o-transition: -o-transform var(--speed);
   transition: transform var(--speed);
+  color: var(--up-color);
 }
 .odometer.odometer-auto-theme.odometer-animating-up.odometer-animating
   .odometer-ribbon-inner,
@@ -102,6 +103,7 @@
   -ms-transition: -ms-transform var(--speed);
   -o-transition: -o-transform var(--speed);
   transition: transform var(--speed);
+  color: var(--down-color);
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
