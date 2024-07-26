@@ -1,7 +1,7 @@
 :root {
   --speed: 2s;
-  --up-color: white;
-  --down-color: white;
+  --up-color: green;
+  --down-color: red;
 }
 
 .odometer.odometer-auto-theme,
