@@ -48,7 +48,6 @@ p {
   border: 0.1em solid #ffffff;
   transition: margin-top 500ms;
   background-color: rgb(247, 245, 254);
-  border: 0.1em solid rgb(255, 255, 255);
 }
 
 .image {
@@ -91,7 +90,6 @@ p {
   font-family: 'Roboto', sans-serif;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   padding-left: 0.1vw;
   font-size: 1.25vw;
 }
@@ -140,3 +138,13 @@ p {
 #battle_name_gap {
   margin-top: -0.25vw;
 }
+
+.fire {
+  height: 2.25vw;
+  width: 1.44vw;
+  margin-top: 2vw;
+  margin-left: -1.7vw;
+  float: left;
+  border-radius: 50%;
+  z-index: 10;
+  }
