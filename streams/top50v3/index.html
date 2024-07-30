@@ -7,14 +7,26 @@
 <body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
     <div class="bar" id="bar" style="margin-top: 0px; display: grid; grid-template-columns: repeat(2, 1fr);">
         <div class="card" id="battle">
-        </div>
+            <div class="num" id="battle_num_1">00</div>
+            <img src="./blank.png" alt id="battle_fire_1" class="fire">
+            <img src="./default.png" alt id="battle_image_1" class="image">
+            <div class="name" id="battle_name_1">Loading</div>
+            <div class="count odometer" id="battle_count_1">0</div>
+            <div class="num num2" id="battle_num_2">00</div>
+            <img src="./blank.png" alt id="battle_fire_2" class="fire fire2">
+            <img src="./default.png" alt id="battle_image_2" class="image image2">
+            <div class="name name2" id="battle_name_2">Loading</div>
+            <div class="count odometer" id="battle_count_2">0</div>
+            <div class="name name3" id="battle_text">Difference</div>
+            <div class="count2 odometer" id="battle_gap">0</div>
+            </div>
         <div class="card" id="info">
             <div class="stats"><span> Top 100 Combined: <a class="odometer" id="combined">0</a>, Watching: <a class="odometer" id="watching">0</a>, Likes: <a class="odometer" id="likes">0</a>, Subscribers: <a class="odometer" id="subscribers">0</a>, Time: <a id="time">00:00:00</a></span></div>
-            <div class="RightToleft stats">
-                <p id="stats">Lorem ipsum dolor sit amet consectetur</p>
+            <div class="RightToleft stats" style="display: flex; margin-top: -1vw;">
+                <p id="stats">Still Working On This.</p>
             </div>
-            <div class="RightToleft stats">
-                <p id="info">Lorem ipsum dolor sit amet consectetur</p>
+            <div class="RightToleft stats" style="display: flex; margin-top: -2vw;">
+                <p id="info">Hopefully Fixed In A Few Days.</p>
             </div>
         </div>
     </div>
@@ -384,9 +396,14 @@
 <script>
     var channelsIds = [];
     var channels = [];
+    var battles = [];
+    var battlesTime = [];
     var averages = {};
     let sortedChannels = [];
     let sortedAverages = [];
+    let sortedBattles = [];
+    let battleCount1;
+    let battleCount2;
 
     function GetCommas(t) {
         return ("" + t).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -522,17 +539,66 @@
 
         sortedChannels = [...channels].sort((a, b) => b.subcount - a.subcount);
         sortedAverages = [...channels].sort((a, b) => b.average - a.average);
+        
+        for (let i = 0; i < (sortedChannels.length - 1); i++) {
+            if (sortedChannels[i].average > sortedChannels[i + 1].average) {
+                battlesTime[i] = new Date().getTime() * 2
+            } else {
+                battlesTime[i] = new Date().getTime() + ((sortedChannels[i].subcount - sortedChannels[i + 1].subcount) / Math.abs(sortedChannels[i + 1].average - sortedChannels[i].average)) * 86400000
+            }
+            battles[i] = {
+                name1: sortedChannels[i].name,
+                avatar1: sortedChannels[i].avatar,
+                id1: sortedChannels[i].id,
+                average1: sortedChannels[i].average,
+                subcount1: sortedChannels[i].subcount,
+                name2: sortedChannels[i + 1].name,
+                avatar2: sortedChannels[i + 1].avatar,
+                id2: sortedChannels[i + 1].id,
+                average2: sortedChannels[i + 1].average,
+                subcount2: sortedChannels[i + 1].subcount,
+                place1: i + 1,
+                place2: i + 2,
+                time: battlesTime[i],
+                subcount: Math.floor(sortedChannels[i].subcount + ((sortedChannels[i].subcount - sortedChannels[i + 1].subcount) / Math.abs(sortedChannels[i + 1].average - sortedChannels[i].average)) * sortedChannels[i].average)
+            };
+        };
+
+        sortedBattles = [...battles].sort((a, b) => a.time - b.time);
         document.getElementById("combined").innerHTML = channels.map(c => c.subcount).reduce((a, b) => a + b, 0);
         console.log(channelsIds);
         console.log(sortedChannels);
         console.log(sortedAverages);
+        console.log(sortedBattles);
+        console.log([sortedBattles[0], (sortedBattles[0].time - new Date().getTime())]);
 
-        await fetch(`https://mixerno.space/api/youtube-stream-counter/user/zOlqqZdqdec`)
-            .then((res) => res.json())
-            .then((data) => {
-                document.getElementById("watching").innerHTML = data.counts[0].count;
-                document.getElementById("likes").innerHTML = data.counts[2].count;
+        fetch(`https://yt.lemnoslife.com/noKey/playlistItems?part=snippet&fields=items/snippet/resourceId/videoId&order=date&maxResults=50&playlistId=UUlOyuxZvQkoHoIn15kNbkUw`)
+        .then((res) => res.json())
+        .then((data) => {
+            let vidIds = data.items.map((video) => {
+                return video.snippet.resourceId.videoId;
             });
+
+            if (vidIds.length > 0) {
+                fetch(`https://yt.lemnoslife.com/noKey/videos?part=snippet,liveStreamingDetails,contentDetails&fields=items(id,snippet/publishedAt,liveStreamingDetails,contentDetails/duration)&id=${vidIds.join(",")}`)
+                    .then((res) => res.json())
+                    .then((streams) => {
+
+                        let filteredVids = streams.items.filter(filteredVideo => 
+                            filteredVideo.liveStreamingDetails !== null || 
+                            filteredVideo.snippet.publishedAt !== filteredVideo.liveStreamingDetails?.actualStartTime
+                        );
+
+                        let latestVidID = filteredVids[0].id;
+                        fetch(`https://mixerno.space/api/youtube-stream-counter/user/${latestVidID}`)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            document.getElementById("watching").innerHTML = data.counts[0].count;
+                            document.getElementById("likes").innerHTML = data.counts[2].count;
+                        });
+                    });
+            }
+        });
 
         await fetch(`https://corsproxy.io/?https://studio.nia-statistics.com/api/channel/UClOyuxZvQkoHoIn15kNbkUw`)
             .then((res) => res.json())
@@ -584,6 +650,98 @@
             }, i * 400);
         }
     }
+        async function updateBattleData() {
+    if (sortedBattles[0].id1 === "UC-lHJZR3Gqxm24_Vd_AJ5Yw") {
+                await fetch(`https://api.communitrics.com/UC-lHJZR3Gqxm24_Vd_AJ5Yw?averages=true`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount1 = data.channelDetails.linearEstSubscriberCount
+                    });
+            } else if (sortedBattles[0].id1 === "UCX6OQ3DkcsbYNE6H8uQQuVA") {
+                await fetch(`https://axern.space/api/get?platform=youtube&type=channel&id=UCX6OQ3DkcsbYNE6H8uQQuVA`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount1 = data.estSubCount
+                    });
+            } else {
+                await fetch(`https://axern.space/api/get?platform=youtube&type=channel&id=${sortedBattles[0].id1}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount1 = data.estSubCount_linear
+                        });
+
+                        if (sortedBattles[0].id2 === "UC-lHJZR3Gqxm24_Vd_AJ5Yw") {
+                await fetch(`https://api.communitrics.com/UC-lHJZR3Gqxm24_Vd_AJ5Yw?averages=true`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount2 = data.channelDetails.linearEstSubscriberCount
+                    });
+            } else if (sortedBattles[0].id2 === "UCX6OQ3DkcsbYNE6H8uQQuVA") {
+                await fetch(`https://axern.space/api/get?platform=youtube&type=channel&id=UCX6OQ3DkcsbYNE6H8uQQuVA`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount2 = data.estSubCount
+                    });
+            } else {
+                await fetch(`https://axern.space/api/get?platform=youtube&type=channel&id=${sortedBattles[0].id2}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        battleCount2 = data.estSubCount_linear
+                        });
+                        }
+            }
+
+                        document.getElementById(`battle_image_1`).src = sortedBattles[0].avatar1;
+        if (sortedBattles[0].place1 < 10) {
+                document.getElementById(`battle_num_1`).textContent = `0${sortedBattles[0].place1}`;
+        } else {
+            document.getElementById(`battle_num_1`).textContent = sortedBattles[0].place1;
+        }
+        // Check the length of the name and trim if necessary
+        if (sortedBattles[0].name1.length > 20) {
+            document.getElementById(`battle_name_1`).textContent = sortedBattles[0].name1.substring(0, 20) + '...';
+        } else {
+            document.getElementById(`battle_name_1`).textContent = sortedBattles[0].name1;
+        }
+        document.getElementById(`battle_count_1`).innerHTML = battleCount1;
+        if (sortedBattles[0].average1 > 500000) {
+        document.getElementById(`battle_fire_1`).src = "high_blue.gif";
+        } else if (sortedBattles[0].average1 > 200000) {
+        document.getElementById(`battle_fire_1`).src = "low_blue.gif";
+        } else if (sortedBattles[0].average1 > 100000) {
+            document.getElementById(`battle_fire_1`).src = "high_red.gif";
+            } else if (sortedBattles[0].average1 > 50000) {
+            document.getElementById(`battle_fire_1`).src = "low_red.gif";
+            } else {
+            document.getElementById(`battle_fire_1`).src = "blank.png";
+            }
+
+        document.getElementById(`battle_image_2`).src = sortedBattles[0].avatar2;
+        if (sortedBattles[0].place2 < 10) {
+                document.getElementById(`battle_num_2`).textContent = `0${sortedBattles[0].place2}`;
+        } else {
+            document.getElementById(`battle_num_2`).textContent = sortedBattles[0].place2;
+        }
+        // Check the length of the name and trim if necessary
+        if (sortedBattles[0].name2.length > 20) {
+            document.getElementById(`battle_name_2`).textContent = sortedBattles[0].name2.substring(0, 20) + '...';
+        } else {
+            document.getElementById(`battle_name_2`).textContent = sortedBattles[0].name2;
+        }
+        document.getElementById(`battle_count_2`).innerHTML = battleCount2;
+        if (sortedBattles[0].average2 > 500000) {
+        document.getElementById(`battle_fire_2`).src = "high_blue.gif";
+        } else if (sortedBattles[0].average2 > 200000) {
+        document.getElementById(`battle_fire_2`).src = "low_blue.gif";
+        } else if (sortedBattles[0].average2 > 100000) {
+            document.getElementById(`battle_fire_2`).src = "high_red.gif";
+            } else if (sortedBattles[0].average2 > 50000) {
+            document.getElementById(`battle_fire_2`).src = "low_red.gif";
+            } else {
+            document.getElementById(`battle_fire_2`).src = "blank.png";
+            }
+        document.getElementById(`battle_gap`).innerHTML = battleCount1 - battleCount2;
+    }
 
     (async () => {
         await fetchChannelIds();
@@ -595,6 +753,10 @@
         setInterval(async () => {
             await updateChannelData();
         }, 20000);
+
+        setInterval(async () => {
+            await updateBattleData();
+        }, 2000);
 
         setInterval(() => {
             const d = new Date();
@@ -617,7 +779,6 @@
 
         setInterval(() => {
             let stats = `${sortedAverages[0].name} Gains ${abbreviate(sortedAverages[0].average)} Subscribers Per Day. | ${sortedAverages[1].name} Gains ${abbreviate(sortedAverages[1].average)} Subscribers Per Day. | ${sortedAverages[2].name} Gains ${abbreviate(sortedAverages[2].average)} Subscribers Per Day. | Top 100 Ranks After Top 50: | #51: ${sortedChannels[50].name}: ${GetCommas(sortedChannels[50].subcount)} | #52: ${sortedChannels[51].name}: ${GetCommas(sortedChannels[51].subcount)} | #53: ${sortedChannels[52].name}: ${GetCommas(sortedChannels[52].subcount)} | #54: ${sortedChannels[53].name}: ${GetCommas(sortedChannels[53].subcount)} | #55: ${sortedChannels[54].name}: ${GetCommas(sortedChannels[54].subcount)} | #56: ${sortedChannels[55].name}: ${GetCommas(sortedChannels[55].subcount)} | #57: ${sortedChannels[56].name}: ${GetCommas(sortedChannels[56].subcount)} | #58: ${sortedChannels[57].name}: ${GetCommas(sortedChannels[57].subcount)} | #59: ${sortedChannels[58].name}: ${GetCommas(sortedChannels[58].subcount)} | #60: ${sortedChannels[59].name}: ${GetCommas(sortedChannels[59].subcount)} | #61: ${sortedChannels[60].name}: ${GetCommas(sortedChannels[60].subcount)} | #62: ${sortedChannels[61].name}: ${GetCommas(sortedChannels[61].subcount)} | #63: ${sortedChannels[62].name}: ${GetCommas(sortedChannels[62].subcount)} | #64: ${sortedChannels[63].name}: ${GetCommas(sortedChannels[63].subcount)} | #65: ${sortedChannels[64].name}: ${GetCommas(sortedChannels[64].subcount)} | #66: ${sortedChannels[65].name}: ${GetCommas(sortedChannels[65].subcount)} | #67: ${sortedChannels[66].name}: ${GetCommas(sortedChannels[66].subcount)} | #68: ${sortedChannels[67].name}: ${GetCommas(sortedChannels[67].subcount)} | #69: ${sortedChannels[68].name}: ${GetCommas(sortedChannels[68].subcount)} | #70: ${sortedChannels[69].name}: ${GetCommas(sortedChannels[69].subcount)} | #71: ${sortedChannels[70].name}: ${GetCommas(sortedChannels[70].subcount)} | #72: ${sortedChannels[71].name}: ${GetCommas(sortedChannels[71].subcount)} | #73: ${sortedChannels[72].name}: ${GetCommas(sortedChannels[72].subcount)} | #74: ${sortedChannels[73].name}: ${GetCommas(sortedChannels[73].subcount)} | #75: ${sortedChannels[74].name}: ${GetCommas(sortedChannels[74].subcount)} | #76: ${sortedChannels[75].name}: ${GetCommas(sortedChannels[75].subcount)} | #77: ${sortedChannels[76].name}: ${GetCommas(sortedChannels[76].subcount)} | #78: ${sortedChannels[77].name}: ${GetCommas(sortedChannels[77].subcount)} | #79: ${sortedChannels[78].name}: ${GetCommas(sortedChannels[78].subcount)} | #80: ${sortedChannels[79].name}: ${GetCommas(sortedChannels[79].subcount)} | #81: ${sortedChannels[80].name}: ${GetCommas(sortedChannels[80].subcount)} | #82: ${sortedChannels[81].name}: ${GetCommas(sortedChannels[81].subcount)} | #83: ${sortedChannels[82].name}: ${GetCommas(sortedChannels[82].subcount)} | #84: ${sortedChannels[83].name}: ${GetCommas(sortedChannels[83].subcount)} | #85: ${sortedChannels[84].name}: ${GetCommas(sortedChannels[84].subcount)} | #86: ${sortedChannels[85].name}: ${GetCommas(sortedChannels[85].subcount)} | #87: ${sortedChannels[86].name}: ${GetCommas(sortedChannels[86].subcount)} | #88: ${sortedChannels[87].name}: ${GetCommas(sortedChannels[87].subcount)} | #89: ${sortedChannels[88].name}: ${GetCommas(sortedChannels[88].subcount)} | #90: ${sortedChannels[89].name}: ${GetCommas(sortedChannels[89].subcount)} | #91: ${sortedChannels[90].name}: ${GetCommas(sortedChannels[90].subcount)} | #92: ${sortedChannels[91].name}: ${GetCommas(sortedChannels[91].subcount)} | #93: ${sortedChannels[92].name}: ${GetCommas(sortedChannels[92].subcount)} | #94: ${sortedChannels[93].name}: ${GetCommas(sortedChannels[93].subcount)} | #95: ${sortedChannels[94].name}: ${GetCommas(sortedChannels[94].subcount)} | #96: ${sortedChannels[95].name}: ${GetCommas(sortedChannels[95].subcount)} | #97: ${sortedChannels[96].name}: ${GetCommas(sortedChannels[96].subcount)} | #98: ${sortedChannels[97].name}: ${GetCommas(sortedChannels[97].subcount)} | #99: ${sortedChannels[98].name}: ${GetCommas(sortedChannels[98].subcount)} | #100: ${sortedChannels[99].name}: ${GetCommas(sortedChannels[99].subcount)}`;
-            document.getElementById(`stats`).innerHTML = stats
             console.log(stats)
         }, 600000);
     })();
